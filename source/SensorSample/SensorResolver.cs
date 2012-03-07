@@ -18,8 +18,8 @@
 
 namespace SensorSample
 {
-    using Appccelerate.AsyncModule;
     using Appccelerate.Bootstrapper;
+    using Appccelerate.EvaluationEngine;
     using Appccelerate.StateMachine;
 
     using SensorSample.Sirius;
@@ -28,14 +28,23 @@ namespace SensorSample
     {
         private readonly IAsynchronousFileLogger fileLogger;
 
-        public SensorResolver(IAsynchronousFileLogger fileLogger)
+        private readonly IEvaluationEngine evaluationEngine;
+
+        public SensorResolver(IAsynchronousFileLogger fileLogger, IEvaluationEngine evaluationEngine)
         {
             this.fileLogger = fileLogger;
+            this.evaluationEngine = evaluationEngine;
         }
 
         public void Resolve(IExtensionPoint<ISensor> extensionPoint)
         {
-            extensionPoint.AddExtension(new DoorSensor(new VhptDoor(), new ActiveStateMachine<States, Events>(), this.fileLogger));
+            extensionPoint.AddExtension(
+                new DoorSensor(
+                    new VhptDoor(), 
+                    new ActiveStateMachine<States, Events>(), 
+                    this.fileLogger,
+                    new VhptTravelCoordinator(),
+                    this.evaluationEngine));
             extensionPoint.AddExtension(new BlackHoleSensor(new VhptBlackHoleSubOrbitDetectionEngine()));
         }
     }

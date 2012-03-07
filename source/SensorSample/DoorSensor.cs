@@ -20,6 +20,7 @@ namespace SensorSample
 {
     using System;
 
+    using Appccelerate.EvaluationEngine;
     using Appccelerate.EventBroker;
     using Appccelerate.EventBroker.Handlers;
     using Appccelerate.StateMachine;
@@ -51,11 +52,24 @@ namespace SensorSample
 
         private readonly IAsynchronousFileLogger fileLogger;
 
-        public DoorSensor(IVhptDoor door, IStateMachine<States, Events> stateMachine, IAsynchronousFileLogger fileLogger)
+        private readonly IVhptTravelCoordinator travelCoordinator;
+
+        private readonly IEvaluationEngine evaluationEngine;
+
+        private bool inPanicMode;
+
+        public DoorSensor(
+            IVhptDoor door, 
+            IStateMachine<States, Events> stateMachine, 
+            IAsynchronousFileLogger fileLogger,
+            IVhptTravelCoordinator travelCoordinator,
+            IEvaluationEngine evaluationEngine)
         {
             this.door = door;
             this.stateMachine = stateMachine;
             this.fileLogger = fileLogger;
+            this.travelCoordinator = travelCoordinator;
+            this.evaluationEngine = evaluationEngine;
         }
 
         public string Name
@@ -117,7 +131,7 @@ namespace SensorSample
             this.stateMachine
                 .In(States.DoorOpenInNormalMode)
                 .On(Events.BlackHoleDetected).Goto(States.DoorOpenInPanicMode)
-                .On(Events.DoorClosed).Goto(States.DoorClosedInNormalMode).Execute(this.LogDoorClosedInNormalMode);
+                .On(Events.DoorClosed).Goto(States.DoorClosedInNormalMode).Execute(this.DetermineTargetLevel, this.LogDoorClosedInNormalMode);
 
             this.stateMachine
                 .In(States.DoorClosedInPanicMode)
@@ -125,11 +139,11 @@ namespace SensorSample
 
             this.stateMachine
                 .In(States.DoorOpenInPanicMode)
-                .On(Events.DoorClosed).Goto(States.DoorClosedInPanicMode).Execute(this.LogDoorClosedInPanicMode);
+                .On(Events.DoorClosed).Goto(States.DoorClosedInPanicMode).Execute(this.DetermineTargetLevel, this.LogDoorClosedInPanicMode);
 
             this.stateMachine
                 .In(States.PanicMode)
-                .ExecuteOnEntry(this.LogBlackHoleDetected)
+                .ExecuteOnEntry(this.LogBlackHoleDetected, this.SetInPanicModeFlag)
                 .On(Events.BlackHoleDetected);
 
             this.stateMachine.Initialize(States.NormalMode);
@@ -143,6 +157,18 @@ namespace SensorSample
         private void HandleDoorClosed(object sender, EventArgs e)
         {
             this.stateMachine.Fire(Events.DoorClosed);
+        }
+
+        private void DetermineTargetLevel()
+        {
+            int result = this.evaluationEngine.Answer(new WhereDoesThePassangerWantToTravelTo(), this.inPanicMode);
+
+            this.travelCoordinator.TravelTo(result);
+        }
+
+        private void SetInPanicModeFlag()
+        {
+            this.inPanicMode = true;
         }
 
         private void LogBlackHoleDetected()

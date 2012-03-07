@@ -21,6 +21,7 @@ namespace SensorSample
     using Appccelerate.AsyncModule;
     using Appccelerate.Bootstrapper;
     using Appccelerate.Bootstrapper.Syntax;
+    using Appccelerate.EvaluationEngine;
     using Appccelerate.EventBroker;
 
     using SensorSample.Sirius;
@@ -29,21 +30,24 @@ namespace SensorSample
     {
         private readonly IEventBroker globalEventBroker;
         private readonly AsynchronousVhptFileLogger fileLogger;
+        private readonly IEvaluationEngine evaluationEngine;
 
         public BootstrapperStrategy()
         {
             this.globalEventBroker = new EventBroker();
             this.fileLogger = new AsynchronousVhptFileLogger(new ModuleController(), new VhptFileLogger());
+            this.evaluationEngine = new EvaluationEngine();
         }
 
         public override IExtensionResolver<ISensor> CreateExtensionResolver()
         {
-            return new SensorResolver(this.fileLogger);
+            return new SensorResolver(this.fileLogger, this.evaluationEngine);
         }
 
         protected override void DefineRunSyntax(ISyntaxBuilder<ISensor> builder)
         {
             builder
+                .Execute(() => this.InitializeEvaluationEngine())
                 .Execute(() => this.fileLogger.Initialize())
                 .Execute(() => this.fileLogger.Start())
                 .Execute(sensor => sensor.StartObservation())
@@ -64,6 +68,14 @@ namespace SensorSample
             base.Dispose(disposing);
 
             this.fileLogger.Dispose();
+        }
+
+        private void InitializeEvaluationEngine()
+        {
+            this.evaluationEngine.SetLogExtension(new EvaluationEngineReporter());
+
+            this.evaluationEngine.Load(new VhptOracle());
+            this.evaluationEngine.Load(new PanicModeTargetLevelOracle());
         }
     }
 }
