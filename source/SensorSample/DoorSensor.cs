@@ -49,10 +49,13 @@ namespace SensorSample
 
         private readonly IStateMachine<States, Events> stateMachine;
 
-        public DoorSensor(IVhptDoor door, IStateMachine<States, Events> stateMachine)
+        private readonly IAsynchronousFileLogger fileLogger;
+
+        public DoorSensor(IVhptDoor door, IStateMachine<States, Events> stateMachine, IAsynchronousFileLogger fileLogger)
         {
             this.door = door;
             this.stateMachine = stateMachine;
+            this.fileLogger = fileLogger;
         }
 
         public string Name
@@ -144,27 +147,34 @@ namespace SensorSample
 
         private void LogBlackHoleDetected()
         {
-            Console.WriteLine("black hole detected! PANIC!!!");
+            this.Log("black hole detected! PANIC!!!");
         }
 
         private void LogDoorOpenedInNormalMode()
         {
-            Console.WriteLine("door is open!");
+            this.Log("door is open!");
         }
 
         private void LogDoorClosedInNormalMode()
         {
-            Console.WriteLine("door is closed!");
+            this.Log("door is closed!");
         }
 
         private void LogDoorOpenedInPanicMode()
         {
-            Console.WriteLine("door is open! PANIC!!!");
+            this.Log("door is open! PANIC!!!");
         }
 
         private void LogDoorClosedInPanicMode()
         {
-            Console.WriteLine("door is closed! PANIC!!!");
+            this.Log("door is closed! PANIC!!!");
+        }
+
+        private void Log(string message)
+        {
+            Console.WriteLine(message);
+
+            this.fileLogger.Log(message);
         }
     }
 }

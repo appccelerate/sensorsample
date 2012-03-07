@@ -18,27 +18,34 @@
 
 namespace SensorSample
 {
+    using Appccelerate.AsyncModule;
     using Appccelerate.Bootstrapper;
     using Appccelerate.Bootstrapper.Syntax;
     using Appccelerate.EventBroker;
 
+    using SensorSample.Sirius;
+
     public class BootstrapperStrategy : AbstractStrategy<ISensor>
     {
         private readonly IEventBroker globalEventBroker;
+        private readonly AsynchronousVhptFileLogger fileLogger;
 
         public BootstrapperStrategy()
         {
             this.globalEventBroker = new EventBroker();
+            this.fileLogger = new AsynchronousVhptFileLogger(new ModuleController(), new VhptFileLogger());
         }
 
         public override IExtensionResolver<ISensor> CreateExtensionResolver()
         {
-            return new SensorResolver();
+            return new SensorResolver(this.fileLogger);
         }
 
         protected override void DefineRunSyntax(ISyntaxBuilder<ISensor> builder)
         {
             builder
+                .Execute(() => this.fileLogger.Initialize())
+                .Execute(() => this.fileLogger.Start())
                 .Execute(sensor => sensor.StartObservation())
                     .With(new InitializeSensorBehavior())
                     .With(new RegisterOnEventBrokerBehavior(this.globalEventBroker));
@@ -50,6 +57,13 @@ namespace SensorSample
                 .Execute(sensor => sensor.StopObservation())
             .End
                 .With(new UnregisterOnEventBrokerBehavior(this.globalEventBroker));
+        }
+
+        protected override void Dispose(bool disposing)
+        {
+            base.Dispose(disposing);
+
+            this.fileLogger.Dispose();
         }
     }
 }

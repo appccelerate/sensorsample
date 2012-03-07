@@ -68,8 +68,11 @@
   <ItemGroup>
     <Compile Include="BlackHoleSensor.cs" />
     <Compile Include="BootstrapperStrategy.cs" />
+    <Compile Include="IAsynchronousFileLogger.cs" />
     <Compile Include="IInitializable.cs" />
     <Compile Include="InitializeSensorBehavior.cs" />
+    <Compile Include="Sirius\IVhptFileLogger.cs" />
+    <Compile Include="AsynchronousVhptFileLogger.cs" />
     <Compile Include="UnregisterOnEventBrokerBehavior.cs" />
     <Compile Include="DoorSensor.cs" />
     <Compile Include="Eventtopics.cs" />
