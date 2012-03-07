@@ -24,7 +24,7 @@ namespace SensorSample
 
     public class BootstrapperStrategy : AbstractStrategy<ISensor>
     {
-        private IEventBroker globalEventBroker;
+        private readonly IEventBroker globalEventBroker;
 
         public BootstrapperStrategy()
         {
@@ -40,6 +40,7 @@ namespace SensorSample
         {
             builder
                 .Execute(sensor => sensor.StartObservation())
+                    .With(new InitializeSensorBehavior())
                     .With(new RegisterOnEventBrokerBehavior(this.globalEventBroker));
         }
 

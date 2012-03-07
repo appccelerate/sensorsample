@@ -22,16 +22,37 @@ namespace SensorSample
 
     using Appccelerate.EventBroker;
     using Appccelerate.EventBroker.Handlers;
+    using Appccelerate.StateMachine;
 
     using SensorSample.Sirius;
 
-    public class DoorSensor : ISensor
+    public enum States
+    {
+        NormalMode,
+        PanicMode,
+        DoorOpenInNormalMode,
+        DoorClosedInNormalMode,
+        DoorOpenInPanicMode,
+        DoorClosedInPanicMode
+    }
+
+    public enum Events
+    {
+        BlackHoleDetected,
+        DoorOpened,
+        DoorClosed
+    }
+
+    public class DoorSensor : ISensor, IInitializable
     {
         private readonly IVhptDoor door;
 
-        public DoorSensor(IVhptDoor door)
+        private readonly IStateMachine<States, Events> stateMachine;
+
+        public DoorSensor(IVhptDoor door, IStateMachine<States, Events> stateMachine)
         {
             this.door = door;
+            this.stateMachine = stateMachine;
         }
 
         public string Name
@@ -49,6 +70,8 @@ namespace SensorSample
 
         public void StartObservation()
         {
+            this.stateMachine.Start();
+
             this.door.Opened += this.HandleDoorOpened;
             this.door.Closed += this.HandleDoorClosed;
         }
@@ -57,22 +80,91 @@ namespace SensorSample
         {
             this.door.Opened -= this.HandleDoorOpened;
             this.door.Closed -= this.HandleDoorClosed;
+
+            this.stateMachine.Stop();
         }
 
         [EventSubscription(EventTopics.BlackHoleDetected, typeof(Publisher))]
         public void HandleBlackHoleDetection(object sender, EventArgs e)
         {
-            Console.WriteLine("black hole detected! PANIC!!!");
+            this.stateMachine.Fire(Events.BlackHoleDetected);
+        }
+
+        public void Initialize()
+        {
+            this.stateMachine.DefineHierarchyOn(
+                States.NormalMode, 
+                States.DoorClosedInNormalMode,
+                HistoryType.Deep,
+                States.DoorClosedInNormalMode, 
+                States.DoorOpenInNormalMode);
+
+            this.stateMachine.DefineHierarchyOn(
+                States.PanicMode,
+                States.DoorClosedInPanicMode,
+                HistoryType.Deep,
+                States.DoorClosedInPanicMode,
+                States.DoorOpenInPanicMode);
+
+            this.stateMachine
+                .In(States.DoorClosedInNormalMode)
+                .On(Events.BlackHoleDetected).Goto(States.DoorClosedInPanicMode)
+                .On(Events.DoorOpened).Goto(States.DoorOpenInNormalMode).Execute(this.LogDoorOpenedInNormalMode);
+
+            this.stateMachine
+                .In(States.DoorOpenInNormalMode)
+                .On(Events.BlackHoleDetected).Goto(States.DoorOpenInPanicMode)
+                .On(Events.DoorClosed).Goto(States.DoorClosedInNormalMode).Execute(this.LogDoorClosedInNormalMode);
+
+            this.stateMachine
+                .In(States.DoorClosedInPanicMode)
+                .On(Events.DoorOpened).Goto(States.DoorOpenInPanicMode).Execute(this.LogDoorOpenedInPanicMode);
+
+            this.stateMachine
+                .In(States.DoorOpenInPanicMode)
+                .On(Events.DoorClosed).Goto(States.DoorClosedInPanicMode).Execute(this.LogDoorClosedInPanicMode);
+
+            this.stateMachine
+                .In(States.PanicMode)
+                .ExecuteOnEntry(this.LogBlackHoleDetected)
+                .On(Events.BlackHoleDetected);
+
+            this.stateMachine.Initialize(States.NormalMode);
         }
 
         private void HandleDoorOpened(object sender, EventArgs e)
         {
-            Console.WriteLine("door is open!");
+            this.stateMachine.Fire(Events.DoorOpened);
         }
 
         private void HandleDoorClosed(object sender, EventArgs e)
         {
+            this.stateMachine.Fire(Events.DoorClosed);
+        }
+
+        private void LogBlackHoleDetected()
+        {
+            Console.WriteLine("black hole detected! PANIC!!!");
+        }
+
+        private void LogDoorOpenedInNormalMode()
+        {
+            Console.WriteLine("door is open!");
+        }
+
+        private void LogDoorClosedInNormalMode()
+        {
             Console.WriteLine("door is closed!");
+        }
+
+        private void LogDoorOpenedInPanicMode()
+        {
+            Console.WriteLine("door is open! PANIC!!!");
+        }
+
+        private void LogDoorClosedInPanicMode()
+        {
+            Console.WriteLine("door is closed! PANIC!!!");
         }
     }
 }

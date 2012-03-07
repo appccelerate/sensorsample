@@ -1,5 +1,5 @@
 ﻿//-------------------------------------------------------------------------------
-// <copyright file="SensorResolver.cs" company="Appccelerate">
+// <copyright file="InitializeSensorBehavior.cs" company="Appccelerate">
 //   Copyright (c) 2008-2012
 //
 //   Licensed under the Apache License, Version 2.0 (the "License");
@@ -18,17 +18,30 @@
 
 namespace SensorSample
 {
+    using System.Collections.Generic;
+    using System.Linq;
+
     using Appccelerate.Bootstrapper;
-    using Appccelerate.StateMachine;
+    using Appccelerate.Formatters;
 
-    using SensorSample.Sirius;
-
-    public class SensorResolver : IExtensionResolver<ISensor>
+    public class InitializeSensorBehavior : IBehavior<ISensor>
     {
-        public void Resolve(IExtensionPoint<ISensor> extensionPoint)
+        public string Name
         {
-            extensionPoint.AddExtension(new DoorSensor(new VhptDoor(), new PassiveStateMachine<States, Events>()));
-            extensionPoint.AddExtension(new BlackHoleSensor(new VhptBlackHoleSubOrbitDetectionEngine()));
+            get { return "Initialize sensor behavior"; }
+        }
+
+        public string Describe()
+        {
+            return "initializes sensors that implement " + typeof(IInitializable).FullNameToString();
+        }
+
+        public void Behave(IEnumerable<ISensor> extensions)
+        {
+            foreach (var initializable in extensions.OfType<IInitializable>())
+            {
+                initializable.Initialize();
+            }
         }
     }
 }

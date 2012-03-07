@@ -68,6 +68,8 @@
   <ItemGroup>
     <Compile Include="BlackHoleSensor.cs" />
     <Compile Include="BootstrapperStrategy.cs" />
+    <Compile Include="IInitializable.cs" />
+    <Compile Include="InitializeSensorBehavior.cs" />
     <Compile Include="UnregisterOnEventBrokerBehavior.cs" />
     <Compile Include="DoorSensor.cs" />
     <Compile Include="Eventtopics.cs" />

@@ -1,5 +1,5 @@
 ﻿//-------------------------------------------------------------------------------
-// <copyright file="SensorResolver.cs" company="Appccelerate">
+// <copyright file="IInitializable.cs" company="Appccelerate">
 //   Copyright (c) 2008-2012
 //
 //   Licensed under the Apache License, Version 2.0 (the "License");
@@ -18,17 +18,8 @@
 
 namespace SensorSample
 {
-    using Appccelerate.Bootstrapper;
-    using Appccelerate.StateMachine;
-
-    using SensorSample.Sirius;
-
-    public class SensorResolver : IExtensionResolver<ISensor>
+    public interface IInitializable
     {
-        public void Resolve(IExtensionPoint<ISensor> extensionPoint)
-        {
-            extensionPoint.AddExtension(new DoorSensor(new VhptDoor(), new PassiveStateMachine<States, Events>()));
-            extensionPoint.AddExtension(new BlackHoleSensor(new VhptBlackHoleSubOrbitDetectionEngine()));
-        }
+        void Initialize();         
     }
 }
