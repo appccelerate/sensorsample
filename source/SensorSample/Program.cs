@@ -22,11 +22,13 @@ namespace SensorSample
 
     using Appccelerate.Bootstrapper;
 
+    using SensorSample.Reporters;
+
     public static class Program
     {
         public static void Main(string[] args)
         {
-            using (var bootstrapper = new DefaultBootstrapper<ISensor>())
+            using (var bootstrapper = new DefaultBootstrapper<ISensor>(new BootstrapperReporter()))
             {
                 bootstrapper.Initialize(new BootstrapperStrategy());
 
@@ -37,9 +39,9 @@ namespace SensorSample
                 PrintBody();
 
                 bootstrapper.Shutdown();
-
-                PrintFooter();
             }
+
+            PrintFooter();
         }
 
         private static void PrintHeader()

@@ -1,4 +1,4 @@
-﻿//-------------------------------------------------------------------------------
+//-------------------------------------------------------------------------------
 // <copyright file="EvaluationEngineReporter.cs" company="Appccelerate">
 //   Copyright (c) 2008-2012
 //
@@ -16,7 +16,7 @@
 // </copyright>
 //-------------------------------------------------------------------------------
 
-namespace SensorSample
+namespace SensorSample.Reporters
 {
     using System;
     using System.Globalization;
@@ -49,7 +49,12 @@ namespace SensorSample
                 context.Aggregator.Describe(),
                 expressions.Aggregate(string.Empty, (aggregate, value) => aggregate + Environment.NewLine + "    " + value)); 
 
+            Console.WriteLine();
+            Console.WriteLine();
+            Console.WriteLine("== Evaluation Engine ==");
+            Console.WriteLine();
             Console.WriteLine(message);
+            Console.WriteLine();
         }
     }
 }

@@ -32,27 +32,27 @@ namespace SensorSample.Sirius
     {
         private readonly IDisposable observer;
 
-        public event EventHandler Opened = delegate { };
-
-        public event EventHandler Closed = delegate { };
-
         public VhptDoor()
         {
             var doorIsOpen = from interval in Observable.Interval(TimeSpan.FromSeconds(1))
                              select Convert.ToBoolean(interval % 2);
 
             this.observer = doorIsOpen.Subscribe(value =>
-            {
-                if (value)
                 {
-                    this.Opened(this, EventArgs.Empty);
-                }
-                else
-                {
-                    this.Closed(this, EventArgs.Empty);
-                }
-            });
+                    if (value)
+                    {
+                        this.Opened(this, EventArgs.Empty);
+                    }
+                    else
+                    {
+                        this.Closed(this, EventArgs.Empty);
+                    }
+                });
         }
+
+        public event EventHandler Opened = delegate { };
+
+        public event EventHandler Closed = delegate { };
 
         public void Dispose()
         {

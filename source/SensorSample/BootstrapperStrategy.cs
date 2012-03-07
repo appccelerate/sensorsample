@@ -25,6 +25,7 @@ namespace SensorSample
     using Appccelerate.EvaluationEngine;
     using Appccelerate.EventBroker;
 
+    using SensorSample.Reporters;
     using SensorSample.Sirius;
 
     public class BootstrapperStrategy : AbstractStrategy<ISensor>
@@ -50,6 +51,7 @@ namespace SensorSample
             builder
                 .Begin
                     .With(new ExtensionConfigurationSectionBehavior())
+                .Execute(() => this.InitializeEventBroker())
                 .Execute(() => this.InitializeEvaluationEngine())
                 .Execute(() => this.fileLogger.Initialize())
                 .Execute(() => this.fileLogger.Start())
@@ -71,6 +73,11 @@ namespace SensorSample
             base.Dispose(disposing);
 
             this.fileLogger.Dispose();
+        }
+
+        private void InitializeEventBroker()
+        {
+            this.globalEventBroker.AddExtension(new EventBrokerReporter());
         }
 
         private void InitializeEvaluationEngine()

@@ -68,11 +68,13 @@
   <ItemGroup>
     <Compile Include="BlackHoleSensor.cs" />
     <Compile Include="BootstrapperStrategy.cs" />
-    <Compile Include="EvaluationEngineReporter.cs" />
     <Compile Include="IAsynchronousFileLogger.cs" />
     <Compile Include="IInitializable.cs" />
     <Compile Include="InitializeSensorBehavior.cs" />
     <Compile Include="PanicModeTargetLevelOracle.cs" />
+    <Compile Include="Reporters\BootstrapperReporter.cs" />
+    <Compile Include="Reporters\EvaluationEngineReporter.cs" />
+    <Compile Include="Reporters\EventBrokerReporter.cs" />
     <Compile Include="Sirius\DefinitionHostExtensionMethods.cs" />
     <Compile Include="Sirius\VhptOracle.cs" />
     <Compile Include="Sirius\IVhptFileLogger.cs" />
