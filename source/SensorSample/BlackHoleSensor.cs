@@ -1,5 +1,5 @@
 ﻿//-------------------------------------------------------------------------------
-// <copyright file="DoorSensor.cs" company="Appccelerate">
+// <copyright file="BlackHoleSensor.cs" company="Appccelerate">
 //   Copyright (c) 2008-2012
 //
 //   Licensed under the Apache License, Version 2.0 (the "License");
@@ -21,58 +21,44 @@ namespace SensorSample
     using System;
 
     using Appccelerate.EventBroker;
-    using Appccelerate.EventBroker.Handlers;
 
     using SensorSample.Sirius;
 
-    public class DoorSensor : ISensor
+    public class BlackHoleSensor : ISensor
     {
-        private readonly IVhptDoor door;
+        private readonly IVhptBlackHoleSubOrbitDetectionEngine detectionEngine;
 
-        public DoorSensor(IVhptDoor door)
+        public BlackHoleSensor(IVhptBlackHoleSubOrbitDetectionEngine detectionEngine)
         {
-            this.door = door;
+            this.detectionEngine = detectionEngine;
         }
+
+        [EventPublication(EventTopics.BlackHoleDetected)]
+        public event EventHandler BlackHoleDetected = delegate { };
 
         public string Name
         {
-            get
-            {
-                return "Door sensor";
-            }
+            get { return "Black Hole Sensor"; }
         }
 
         public string Describe()
         {
-            return "The door sensor detects opening and closing of doors";
+            return "Detects black holes";
         }
 
         public void StartObservation()
         {
-            this.door.Opened += this.HandleDoorOpened;
-            this.door.Closed += this.HandleDoorClosed;
+            this.detectionEngine.BlackHoleDetected += this.HandleBlackHoleDetected;
         }
 
         public void StopObservation()
         {
-            this.door.Opened -= this.HandleDoorOpened;
-            this.door.Closed -= this.HandleDoorClosed;
+            this.detectionEngine.BlackHoleDetected -= this.HandleBlackHoleDetected;
         }
 
-        [EventSubscription(EventTopics.BlackHoleDetected, typeof(Publisher))]
-        public void HandleBlackHoleDetection(object sender, EventArgs e)
+        private void HandleBlackHoleDetected(object sender, EventArgs e)
         {
-            Console.WriteLine("black hole detected! PANIC!!!");
-        }
-
-        private void HandleDoorOpened(object sender, EventArgs e)
-        {
-            Console.WriteLine("door is open!");
-        }
-
-        private void HandleDoorClosed(object sender, EventArgs e)
-        {
-            Console.WriteLine("door is closed!");
+            this.BlackHoleDetected(sender, e);
         }
     }
 }

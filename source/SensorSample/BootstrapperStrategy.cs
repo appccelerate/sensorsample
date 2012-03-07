@@ -20,9 +20,17 @@ namespace SensorSample
 {
     using Appccelerate.Bootstrapper;
     using Appccelerate.Bootstrapper.Syntax;
+    using Appccelerate.EventBroker;
 
     public class BootstrapperStrategy : AbstractStrategy<ISensor>
     {
+        private IEventBroker globalEventBroker;
+
+        public BootstrapperStrategy()
+        {
+            this.globalEventBroker = new EventBroker();
+        }
+
         public override IExtensionResolver<ISensor> CreateExtensionResolver()
         {
             return new SensorResolver();
@@ -31,13 +39,16 @@ namespace SensorSample
         protected override void DefineRunSyntax(ISyntaxBuilder<ISensor> builder)
         {
             builder
-                .Execute(sensor => sensor.StartObservation());
+                .Execute(sensor => sensor.StartObservation())
+                    .With(new RegisterOnEventBrokerBehavior(this.globalEventBroker));
         }
 
         protected override void DefineShutdownSyntax(ISyntaxBuilder<ISensor> builder)
         {
             builder
-                .Execute(sensor => sensor.StopObservation());
+                .Execute(sensor => sensor.StopObservation())
+            .End
+                .With(new UnregisterOnEventBrokerBehavior(this.globalEventBroker));
         }
     }
 }

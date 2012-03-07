@@ -66,12 +66,17 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="BlackHoleSensor.cs" />
     <Compile Include="BootstrapperStrategy.cs" />
+    <Compile Include="UnregisterOnEventBrokerBehavior.cs" />
     <Compile Include="DoorSensor.cs" />
+    <Compile Include="Eventtopics.cs" />
     <Compile Include="ISensor.cs" />
     <Compile Include="Program.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
+    <Compile Include="RegisterOnEventBrokerBehavior.cs" />
     <Compile Include="SensorResolver.cs" />
+    <Compile Include="Sirius\IVhptBlackHoleSubOrbitDetectionEngine.cs" />
     <Compile Include="Sirius\IVhptDoor.cs" />
   </ItemGroup>
   <ItemGroup>

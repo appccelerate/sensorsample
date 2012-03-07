@@ -1,5 +1,5 @@
 ﻿//-------------------------------------------------------------------------------
-// <copyright file="SensorResolver.cs" company="Appccelerate">
+// <copyright file="Eventtopics.cs" company="Appccelerate">
 //   Copyright (c) 2008-2012
 //
 //   Licensed under the Apache License, Version 2.0 (the "License");
@@ -18,16 +18,8 @@
 
 namespace SensorSample
 {
-    using Appccelerate.Bootstrapper;
-
-    using SensorSample.Sirius;
-
-    public class SensorResolver : IExtensionResolver<ISensor>
+    public static class EventTopics
     {
-        public void Resolve(IExtensionPoint<ISensor> extensionPoint)
-        {
-            extensionPoint.AddExtension(new DoorSensor(new VhptDoor()));
-            extensionPoint.AddExtension(new BlackHoleSensor(new VhptBlackHoleSubOrbitDetectionEngine()));
-        }
+         public const string BlackHoleDetected = "topic://BlackHoleDetected";
     }
 }
