@@ -22,5 +22,11 @@ namespace SensorSample
 
     public class WhereDoesThePassangerWantToTravelTo : Question<int, bool>
     {
+        public WhereDoesThePassangerWantToTravelTo(bool panicModeEnabled)
+        {
+            this.PanicModeEnabled = panicModeEnabled;
+        }
+
+        public bool PanicModeEnabled { get; private set; }
     }
 }

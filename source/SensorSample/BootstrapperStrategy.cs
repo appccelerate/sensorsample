@@ -20,6 +20,7 @@ namespace SensorSample
 {
     using Appccelerate.AsyncModule;
     using Appccelerate.Bootstrapper;
+    using Appccelerate.Bootstrapper.Configuration;
     using Appccelerate.Bootstrapper.Syntax;
     using Appccelerate.EvaluationEngine;
     using Appccelerate.EventBroker;
@@ -47,6 +48,8 @@ namespace SensorSample
         protected override void DefineRunSyntax(ISyntaxBuilder<ISensor> builder)
         {
             builder
+                .Begin
+                    .With(new ExtensionConfigurationSectionBehavior())
                 .Execute(() => this.InitializeEvaluationEngine())
                 .Execute(() => this.fileLogger.Initialize())
                 .Execute(() => this.fileLogger.Start())

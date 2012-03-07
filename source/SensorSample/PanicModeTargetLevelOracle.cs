@@ -27,7 +27,10 @@ namespace SensorSample
         public void Load(ISolutionDefinitionHost solutionDefinitionHost)
         {
             solutionDefinitionHost.SolveWhereDoesThePassengerWantToTravelTo()
-                .ByEvaluating((question, inPanicMode) => inPanicMode ? 0 : default(int?));
+                .When(question => question.PanicModeEnabled)
+                    .ByEvaluating((question, inPanicMode) => inPanicMode ? 0 : default(int?))
+                .When(question => !question.PanicModeEnabled)
+                    .ByEvaluating((question, parameter) => default(int?));
         }
     }
 }
