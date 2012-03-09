@@ -43,9 +43,15 @@ namespace SensorSample.Reporters
         {
             var builder = new StringBuilder();
 
+            builder.AppendLine("Extensions:");
             context.Extensions.ToList().ForEach(e => Dump(e.Name, e.Description, builder, 0));
-
+            
+            builder.AppendLine();
+            builder.AppendLine("Run syntax:");
             Dump(context.Run, builder);
+
+            builder.AppendLine();
+            builder.AppendLine("Shutdown syntax:");
             Dump(context.Shutdown, builder);
 
             return builder.ToString();
@@ -70,7 +76,7 @@ namespace SensorSample.Reporters
 
         private static void Dump(string name, string description, StringBuilder sb, int indent)
         {
-            sb.AppendLine(string.Format(CultureInfo.InvariantCulture, "{0}[Name = {1}, Description = {2}]", string.Empty.PadLeft(indent), name, description));
+            sb.AppendLine(string.Format(CultureInfo.InvariantCulture, "{0}[{3}{0}    Name = {1}{3}{0}    Description = {2}{3}{0}]", string.Empty.PadLeft(indent), name, description, Environment.NewLine));
         }
     }
 }
