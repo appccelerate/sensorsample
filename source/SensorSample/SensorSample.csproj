@@ -37,22 +37,22 @@
   </PropertyGroup>
   <ItemGroup>
     <Reference Include="Appccelerate.AsyncModule">
-      <HintPath>..\packages\Appccelerate.AsyncModule.0.0.12-alpha\lib\Net40\Appccelerate.AsyncModule.dll</HintPath>
+      <HintPath>..\packages\Appccelerate.AsyncModule.0.0.0-alpha\lib\Net40\Appccelerate.AsyncModule.dll</HintPath>
     </Reference>
     <Reference Include="Appccelerate.Bootstrapper">
-      <HintPath>..\packages\Appccelerate.Bootstrapper.0.0.12-alpha\lib\Net40\Appccelerate.Bootstrapper.dll</HintPath>
+      <HintPath>..\packages\Appccelerate.Bootstrapper.0.0.0-alpha\lib\Net40\Appccelerate.Bootstrapper.dll</HintPath>
     </Reference>
     <Reference Include="Appccelerate.EvaluationEngine">
-      <HintPath>..\packages\Appccelerate.EvaluationEngine.0.0.12-alpha\lib\Net40\Appccelerate.EvaluationEngine.dll</HintPath>
+      <HintPath>..\packages\Appccelerate.EvaluationEngine.0.0.0-alpha\lib\Net40\Appccelerate.EvaluationEngine.dll</HintPath>
     </Reference>
     <Reference Include="Appccelerate.EventBroker">
-      <HintPath>..\packages\Appccelerate.EventBroker.0.0.12-alpha\lib\Net40\Appccelerate.EventBroker.dll</HintPath>
+      <HintPath>..\packages\Appccelerate.EventBroker.0.0.0-alpha\lib\Net40\Appccelerate.EventBroker.dll</HintPath>
     </Reference>
     <Reference Include="Appccelerate.Fundamentals">
-      <HintPath>..\packages\Appccelerate.Fundamentals.0.0.12-alpha\lib\Net40\Appccelerate.Fundamentals.dll</HintPath>
+      <HintPath>..\packages\Appccelerate.Fundamentals.0.0.0-alpha\lib\Net40\Appccelerate.Fundamentals.dll</HintPath>
     </Reference>
     <Reference Include="Appccelerate.StateMachine">
-      <HintPath>..\packages\Appccelerate.StateMachine.0.0.12-alpha\lib\Net40\Appccelerate.StateMachine.dll</HintPath>
+      <HintPath>..\packages\Appccelerate.StateMachine.0.0.0-alpha\lib\Net40\Appccelerate.StateMachine.dll</HintPath>
     </Reference>
     <Reference Include="System" />
     <Reference Include="System.Core" />
@@ -66,31 +66,31 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
-    <Compile Include="BlackHoleSensor.cs" />
-    <Compile Include="BootstrapperStrategy.cs" />
-    <Compile Include="IAsynchronousFileLogger.cs" />
-    <Compile Include="IInitializable.cs" />
-    <Compile Include="InitializeSensorBehavior.cs" />
-    <Compile Include="PanicModeTargetLevelOracle.cs" />
+    <Compile Include="Asynchronous\AsynchronousVhptFileLogger.cs" />
+    <Compile Include="Asynchronous\IAsynchronousFileLogger.cs" />
+    <Compile Include="Bootstrapping\BootstrapperStrategy.cs" />
+    <Compile Include="Bootstrapping\InitializeSensorBehavior.cs" />
+    <Compile Include="Bootstrapping\RegisterOnEventBrokerBehavior.cs" />
+    <Compile Include="Bootstrapping\SensorResolver.cs" />
+    <Compile Include="Bootstrapping\UnregisterOnEventBrokerBehavior.cs" />
+    <Compile Include="Evaluation\PanicModeTargetLevelOracle.cs" />
+    <Compile Include="Evaluation\WhereDoesThePassangerWantToTravelTo.cs" />
     <Compile Include="Reporters\BootstrapperReporter.cs" />
     <Compile Include="Reporters\EvaluationEngineReporter.cs" />
     <Compile Include="Reporters\EventBrokerReporter.cs" />
+    <Compile Include="Sensors\BlackHoleSensor.cs" />
+    <Compile Include="Sensors\DoorSensor.cs" />
+    <Compile Include="Sensors\IInitializable.cs" />
+    <Compile Include="Sensors\ISensor.cs" />
     <Compile Include="Sirius\DefinitionHostExtensionMethods.cs" />
     <Compile Include="Sirius\VhptOracle.cs" />
     <Compile Include="Sirius\IVhptFileLogger.cs" />
-    <Compile Include="AsynchronousVhptFileLogger.cs" />
     <Compile Include="Sirius\IVhptTravelCoordinator.cs" />
-    <Compile Include="UnregisterOnEventBrokerBehavior.cs" />
-    <Compile Include="DoorSensor.cs" />
     <Compile Include="Eventtopics.cs" />
-    <Compile Include="ISensor.cs" />
     <Compile Include="Program.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
-    <Compile Include="RegisterOnEventBrokerBehavior.cs" />
-    <Compile Include="SensorResolver.cs" />
     <Compile Include="Sirius\IVhptBlackHoleSubOrbitDetectionEngine.cs" />
     <Compile Include="Sirius\IVhptDoor.cs" />
-    <Compile Include="WhereDoesThePassangerWantToTravelTo.cs" />
   </ItemGroup>
   <ItemGroup>
     <None Include="App.config" />

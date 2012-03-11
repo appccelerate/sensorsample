@@ -1,4 +1,4 @@
-﻿//-------------------------------------------------------------------------------
+//-------------------------------------------------------------------------------
 // <copyright file="DoorSensor.cs" company="Appccelerate">
 //   Copyright (c) 2008-2012
 //
@@ -16,7 +16,7 @@
 // </copyright>
 //-------------------------------------------------------------------------------
 
-namespace SensorSample
+namespace SensorSample.Sensors
 {
     using System;
 
@@ -25,6 +25,8 @@ namespace SensorSample
     using Appccelerate.EventBroker.Handlers;
     using Appccelerate.StateMachine;
 
+    using SensorSample.Asynchronous;
+    using SensorSample.Evaluation;
     using SensorSample.Sirius;
 
     public enum States
@@ -82,8 +84,7 @@ namespace SensorSample
 
         public bool PanicModeEnabled
         {
-            get;
-            set;
+            get; set;
         }
 
         public string Describe()
@@ -115,19 +116,15 @@ namespace SensorSample
 
         public void Initialize()
         {
-            this.stateMachine.DefineHierarchyOn(
-                States.NormalMode, 
-                States.DoorClosedInNormalMode,
-                HistoryType.Deep,
-                States.DoorClosedInNormalMode, 
-                States.DoorOpenInNormalMode);
+            this.stateMachine.DefineHierarchyOn(States.NormalMode)
+                .WithHistoryType(HistoryType.Deep)
+                .WithInitialSubState(States.DoorClosedInNormalMode)
+                .WithSubState(States.DoorOpenInNormalMode);
 
-            this.stateMachine.DefineHierarchyOn(
-                States.PanicMode,
-                States.DoorClosedInPanicMode,
-                HistoryType.Deep,
-                States.DoorClosedInPanicMode,
-                States.DoorOpenInPanicMode);
+            this.stateMachine.DefineHierarchyOn(States.PanicMode)
+                .WithHistoryType(HistoryType.Deep)
+                .WithInitialSubState(States.DoorClosedInPanicMode)
+                .WithSubState(States.DoorOpenInPanicMode);
 
             this.stateMachine
                 .In(States.DoorClosedInNormalMode)

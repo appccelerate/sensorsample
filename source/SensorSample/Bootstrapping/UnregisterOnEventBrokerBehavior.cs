@@ -1,5 +1,5 @@
 //-------------------------------------------------------------------------------
-// <copyright file="RegisterOnEventBrokerBehavior.cs" company="Appccelerate">
+// <copyright file="UnregisterOnEventBrokerBehavior.cs" company="Appccelerate">
 //   Copyright (c) 2008-2012
 //
 //   Licensed under the Apache License, Version 2.0 (the "License");
@@ -16,37 +16,39 @@
 // </copyright>
 //-------------------------------------------------------------------------------
 
-namespace SensorSample
+namespace SensorSample.Bootstrapping
 {
     using System.Collections.Generic;
 
     using Appccelerate.Bootstrapper;
     using Appccelerate.EventBroker;
 
-    public class RegisterOnEventBrokerBehavior : IBehavior<ISensor>
+    using SensorSample.Sensors;
+
+    public class UnregisterOnEventBrokerBehavior : IBehavior<ISensor>
     {
         private readonly IEventBroker globalEventBroker;
 
-        public RegisterOnEventBrokerBehavior(IEventBroker globalEventBroker)
+        public UnregisterOnEventBrokerBehavior(IEventBroker globalEventBroker)
         {
             this.globalEventBroker = globalEventBroker;
         }
 
         public string Name
         {
-            get { return "Register on global event broker behavior"; }
+            get { return "Unregister on global event broker behavior"; }
         }
 
         public string Describe()
         {
-            return "registers sensors on the global event broker";
+            return "unregisters sensors on the global event broker";
         }
 
         public void Behave(IEnumerable<ISensor> extensions)
         {
             foreach (var extension in extensions)
             {
-                this.globalEventBroker.Register(extension);
+                this.globalEventBroker.Unregister(extension);
             }
         }
     }

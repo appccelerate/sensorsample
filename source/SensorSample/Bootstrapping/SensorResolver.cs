@@ -1,4 +1,4 @@
-﻿//-------------------------------------------------------------------------------
+//-------------------------------------------------------------------------------
 // <copyright file="SensorResolver.cs" company="Appccelerate">
 //   Copyright (c) 2008-2012
 //
@@ -16,12 +16,14 @@
 // </copyright>
 //-------------------------------------------------------------------------------
 
-namespace SensorSample
+namespace SensorSample.Bootstrapping
 {
     using Appccelerate.Bootstrapper;
     using Appccelerate.EvaluationEngine;
     using Appccelerate.StateMachine;
 
+    using SensorSample.Asynchronous;
+    using SensorSample.Sensors;
     using SensorSample.Sirius;
 
     public class SensorResolver : IExtensionResolver<ISensor>

@@ -1,5 +1,5 @@
-﻿//-------------------------------------------------------------------------------
-// <copyright file="IInitializable.cs" company="Appccelerate">
+//-------------------------------------------------------------------------------
+// <copyright file="ISensor.cs" company="Appccelerate">
 //   Copyright (c) 2008-2012
 //
 //   Licensed under the Apache License, Version 2.0 (the "License");
@@ -16,10 +16,14 @@
 // </copyright>
 //-------------------------------------------------------------------------------
 
-namespace SensorSample
+namespace SensorSample.Sensors
 {
-    public interface IInitializable
+    using Appccelerate.Bootstrapper;
+
+    public interface ISensor : IExtension
     {
-        void Initialize();         
+        void StartObservation();
+
+        void StopObservation();
     }
 }

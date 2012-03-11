@@ -21,6 +21,8 @@ namespace SensorSample.Sirius
     using Appccelerate.EvaluationEngine;
     using Appccelerate.EvaluationEngine.Syntax;
 
+    using SensorSample.Evaluation;
+
     public static class DefinitionHostExtensionMethods
     {
          public static IDefinitionSyntax<WhereDoesThePassangerWantToTravelTo, int, bool, int?> 

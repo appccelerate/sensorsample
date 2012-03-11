@@ -1,5 +1,5 @@
 //-------------------------------------------------------------------------------
-// <copyright file="PanicModeTargetLevelOracle.cs" company="Appccelerate">
+// <copyright file="IAsynchronousFileLogger.cs" company="Appccelerate">
 //   Copyright (c) 2008-2012
 //
 //   Licensed under the Apache License, Version 2.0 (the "License");
@@ -16,21 +16,10 @@
 // </copyright>
 //-------------------------------------------------------------------------------
 
-namespace SensorSample
+namespace SensorSample.Asynchronous
 {
-    using Appccelerate.EvaluationEngine;
-
-    using SensorSample.Sirius;
-
-    public class PanicModeTargetLevelOracle : IEvaluationEngineModule
+    public interface IAsynchronousFileLogger
     {
-        public void Load(ISolutionDefinitionHost solutionDefinitionHost)
-        {
-            solutionDefinitionHost.SolveWhereDoesThePassengerWantToTravelTo()
-                .When(question => question.PanicModeEnabled)
-                    .ByEvaluating((question, inPanicMode) => inPanicMode ? 0 : default(int?))
-                .When(question => !question.PanicModeEnabled)
-                    .ByEvaluating((question, parameter) => default(int?));
-        }
+        void Log(string message);
     }
 }
