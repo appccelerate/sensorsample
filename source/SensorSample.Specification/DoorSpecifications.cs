@@ -47,5 +47,8 @@ namespace SensorSample.Specification
 
         It should_write_message_to_file_logger = () =>
             A.CallTo(() => bootstrapperStrategy.FileLogger.Log("door is closed!")).MustHaveHappened();
+
+        It should_tell_travel_coordinator_to_go_to_level_specified_by_oracle = () =>
+            A.CallTo(() => bootstrapperStrategy.TravelCoordinator.TravelTo(42)).MustHaveHappened();
     }
 }

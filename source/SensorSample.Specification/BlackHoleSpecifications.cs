@@ -54,4 +54,35 @@ namespace SensorSample.Specification
         It should_write_panic_message_to_file_logger = () =>
             A.CallTo(() => bootstrapperStrategy.FileLogger.Log("door is closed! PANIC!!!")).MustHaveHappened();
     }
+
+    public class When_a_door_closes_and_a_black_hole_was_detected_and_panic_mode_is_enabled :
+        BlackHoleDetectedSpecification
+    {
+        private Establish context = () =>
+        {
+            bootstrapperStrategy.Door.Opened += Raise.WithEmpty().Now;
+        };
+
+        private Because of = () =>
+            bootstrapperStrategy.Door.Closed += Raise.WithEmpty().Now;
+
+        private It should_tell_travel_coordinator_to_move_to_ground_floor =
+            () => A.CallTo(() => bootstrapperStrategy.TravelCoordinator.TravelTo(0)).MustHaveHappened();
+    }
+
+    [Subject(Subjects.BlackHole)]
+    public class When_a_door_closes_and_a_black_hole_was_detected_and_panic_mode_is_disabled :
+        BlackHoleDetectedSpecification
+    {
+        private Establish context = () =>
+        {
+            bootstrapperStrategy.Door.Opened += Raise.WithEmpty().Now;
+        };
+
+        private Because of = () =>
+            bootstrapperStrategy.Door.Closed += Raise.WithEmpty().Now;
+
+        private It should_tell_travel_coordinator_to_move_to_ground_floor =
+            () => A.CallTo(() => bootstrapperStrategy.TravelCoordinator.TravelTo(42)).MustHaveHappened();
+    }
 }
