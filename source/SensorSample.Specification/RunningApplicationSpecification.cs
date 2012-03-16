@@ -22,6 +22,8 @@ namespace SensorSample.Specification
 
     using Machine.Specifications;
 
+    using SensorSample.Sensors;
+
     public class RunningApplicationSpecification
     {
         protected static DefaultBootstrapper<ISensor> bootstrapper;

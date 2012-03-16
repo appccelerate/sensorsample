@@ -29,6 +29,8 @@ namespace SensorSample.Specification
 
     using FakeItEasy;
 
+    using SensorSample.Bootstrapping;
+    using SensorSample.Sensors;
     using SensorSample.Sirius;
 
     public class TestableBootstrapperStrategy : BootstrapperStrategy
