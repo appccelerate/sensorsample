@@ -1,5 +1,5 @@
 ﻿//-------------------------------------------------------------------------------
-// <copyright file="Eventtopics.cs" company="Appccelerate">
+// <copyright file="EventTopics.cs" company="Appccelerate">
 //   Copyright (c) 2008-2012
 //
 //   Licensed under the Apache License, Version 2.0 (the "License");
@@ -20,6 +20,6 @@ namespace SensorSample
 {
     public static class EventTopics
     {
-         public const string BlackHoleDetected = "topic://BlackHoleDetected";
+        public const string BlackHoleDetected = "topic://BlackHoleDetected";
     }
 }
