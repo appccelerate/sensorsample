@@ -1,5 +1,5 @@
 ﻿//-------------------------------------------------------------------------------
-// <copyright file="Subjects.cs" company="Appccelerate">
+// <copyright file="BlackHoleDetectedSpecification.cs" company="Appccelerate">
 //   Copyright (c) 2008-2012
 //
 //   Licensed under the Apache License, Version 2.0 (the "License");
@@ -18,9 +18,15 @@
 
 namespace SensorSample.Specification
 {
-    public static class Subjects
+    using FakeItEasy;
+
+    using Machine.Specifications;
+
+    public class BlackHoleDetectedSpecification : RunningApplicationSpecification
     {
-        public const string Door = "Door";
-        public const string BlackHole = "BlackHole";
+        Establish context = () =>
+            {
+                bootstrapperStrategy.BlackHoleSubOrbitDetectionEngine.BlackHoleDetected += Raise.WithEmpty().Now;
+            };
     }
 }
