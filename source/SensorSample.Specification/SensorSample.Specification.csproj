@@ -2,22 +2,20 @@
 <Project ToolsVersion="4.0" DefaultTargets="Build" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
   <PropertyGroup>
     <Configuration Condition=" '$(Configuration)' == '' ">Debug</Configuration>
-    <Platform Condition=" '$(Platform)' == '' ">x86</Platform>
+    <Platform Condition=" '$(Platform)' == '' ">AnyCPU</Platform>
     <ProductVersion>8.0.30703</ProductVersion>
     <SchemaVersion>2.0</SchemaVersion>
-    <ProjectGuid>{679EE0F0-9D96-41F8-B3B7-D0B0CFC17391}</ProjectGuid>
-    <OutputType>Exe</OutputType>
+    <ProjectGuid>{87478B25-0A42-4074-ABE4-2583535A9DAC}</ProjectGuid>
+    <OutputType>Library</OutputType>
     <AppDesignerFolder>Properties</AppDesignerFolder>
-    <RootNamespace>SensorSample</RootNamespace>
-    <AssemblyName>SensorSample</AssemblyName>
+    <RootNamespace>SensorSample.Specification</RootNamespace>
+    <AssemblyName>SensorSample.Specification</AssemblyName>
     <TargetFrameworkVersion>v4.0</TargetFrameworkVersion>
-    <TargetFrameworkProfile>Client</TargetFrameworkProfile>
     <FileAlignment>512</FileAlignment>
     <SolutionDir Condition="$(SolutionDir) == '' Or $(SolutionDir) == '*Undefined*'">..\..\source\</SolutionDir>
     <RestorePackages>true</RestorePackages>
   </PropertyGroup>
-  <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Debug|x86' ">
-    <PlatformTarget>x86</PlatformTarget>
+  <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Debug|AnyCPU' ">
     <DebugSymbols>true</DebugSymbols>
     <DebugType>full</DebugType>
     <Optimize>false</Optimize>
@@ -25,9 +23,9 @@
     <DefineConstants>DEBUG;TRACE</DefineConstants>
     <ErrorReport>prompt</ErrorReport>
     <WarningLevel>4</WarningLevel>
-  </PropertyGroup>
-  <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Release|x86' ">
     <PlatformTarget>x86</PlatformTarget>
+  </PropertyGroup>
+  <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Release|AnyCPU' ">
     <DebugType>pdbonly</DebugType>
     <Optimize>true</Optimize>
     <OutputPath>bin\Release\</OutputPath>
@@ -51,14 +49,23 @@
     <Reference Include="Appccelerate.Fundamentals">
       <HintPath>..\packages\Appccelerate.Fundamentals.0.0.12-alpha\lib\Net40\Appccelerate.Fundamentals.dll</HintPath>
     </Reference>
-    <Reference Include="Appccelerate.StateMachine">
+    <Reference Include="Appccelerate.StateMachine, Version=0.0.0.0, Culture=neutral, PublicKeyToken=917bca444d1f2b4c, processorArchitecture=MSIL">
       <HintPath>..\packages\Appccelerate.StateMachine.0.0.12-alpha\lib\Net40\Appccelerate.StateMachine.dll</HintPath>
+    </Reference>
+    <Reference Include="Castle.Core">
+      <HintPath>..\packages\Castle.Core.2.5.2\lib\NET35\Castle.Core.dll</HintPath>
+    </Reference>
+    <Reference Include="FakeItEasy">
+      <HintPath>..\packages\FakeItEasy.1.7.4257.42\lib\NET40\FakeItEasy.dll</HintPath>
+    </Reference>
+    <Reference Include="Machine.Specifications">
+      <HintPath>..\packages\Machine.Specifications.0.5.5.0\lib\net40\Machine.Specifications.dll</HintPath>
+    </Reference>
+    <Reference Include="Machine.Specifications.Clr4">
+      <HintPath>..\packages\Machine.Specifications.0.5.5.0\lib\net40\Machine.Specifications.Clr4.dll</HintPath>
     </Reference>
     <Reference Include="System" />
     <Reference Include="System.Core" />
-    <Reference Include="System.Reactive">
-      <HintPath>..\packages\Rx-Main.1.0.11226\lib\Net4\System.Reactive.dll</HintPath>
-    </Reference>
     <Reference Include="System.Xml.Linq" />
     <Reference Include="System.Data.DataSetExtensions" />
     <Reference Include="Microsoft.CSharp" />
@@ -66,36 +73,21 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
-    <Compile Include="BlackHoleSensor.cs" />
-    <Compile Include="BootstrapperStrategy.cs" />
-    <Compile Include="IAsynchronousFileLogger.cs" />
-    <Compile Include="IInitializable.cs" />
-    <Compile Include="InitializeSensorBehavior.cs" />
-    <Compile Include="PanicModeTargetLevelOracle.cs" />
-    <Compile Include="Reporters\BootstrapperReporter.cs" />
-    <Compile Include="Reporters\EvaluationEngineReporter.cs" />
-    <Compile Include="Reporters\EventBrokerReporter.cs" />
-    <Compile Include="Sirius\DefinitionHostExtensionMethods.cs" />
-    <Compile Include="Sirius\VhptOracle.cs" />
-    <Compile Include="Sirius\IVhptFileLogger.cs" />
-    <Compile Include="AsynchronousVhptFileLogger.cs" />
-    <Compile Include="Sirius\IVhptTravelCoordinator.cs" />
-    <Compile Include="UnregisterOnEventBrokerBehavior.cs" />
-    <Compile Include="DoorSensor.cs" />
-    <Compile Include="Eventtopics.cs" />
-    <Compile Include="ISensor.cs" />
-    <Compile Include="Program.cs" />
+    <Compile Include="DoorSpecifications.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
-    <Compile Include="RegisterOnEventBrokerBehavior.cs" />
-    <Compile Include="SensorResolver.cs" />
-    <Compile Include="Sirius\IVhptBlackHoleSubOrbitDetectionEngine.cs" />
-    <Compile Include="Sirius\IVhptDoor.cs" />
-    <Compile Include="WhereDoesThePassangerWantToTravelTo.cs" />
+    <Compile Include="RunningApplicationSpecification.cs" />
+    <Compile Include="Subjects.cs" />
+    <Compile Include="TestableBootstrapperStrategy.cs" />
   </ItemGroup>
   <ItemGroup>
-    <None Include="App.config" />
     <None Include="packages.config" />
     <None Include="Settings.StyleCop" />
+  </ItemGroup>
+  <ItemGroup>
+    <ProjectReference Include="..\SensorSample\SensorSample.csproj">
+      <Project>{679EE0F0-9D96-41F8-B3B7-D0B0CFC17391}</Project>
+      <Name>SensorSample</Name>
+    </ProjectReference>
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <Import Project="$(SolutionDir)\.nuget\nuget.targets" />

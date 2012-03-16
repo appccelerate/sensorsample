@@ -9,16 +9,38 @@ Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = ".nuget", ".nuget", "{DC5039
 		.nuget\NuGet.targets = .nuget\NuGet.targets
 	EndProjectSection
 EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "SensorSample.Specification", "SensorSample.Specification\SensorSample.Specification.csproj", "{87478B25-0A42-4074-ABE4-2583535A9DAC}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
+		Debug|Any CPU = Debug|Any CPU
+		Debug|Mixed Platforms = Debug|Mixed Platforms
 		Debug|x86 = Debug|x86
+		Release|Any CPU = Release|Any CPU
+		Release|Mixed Platforms = Release|Mixed Platforms
 		Release|x86 = Release|x86
 	EndGlobalSection
 	GlobalSection(ProjectConfigurationPlatforms) = postSolution
+		{679EE0F0-9D96-41F8-B3B7-D0B0CFC17391}.Debug|Any CPU.ActiveCfg = Debug|x86
+		{679EE0F0-9D96-41F8-B3B7-D0B0CFC17391}.Debug|Mixed Platforms.ActiveCfg = Debug|x86
+		{679EE0F0-9D96-41F8-B3B7-D0B0CFC17391}.Debug|Mixed Platforms.Build.0 = Debug|x86
 		{679EE0F0-9D96-41F8-B3B7-D0B0CFC17391}.Debug|x86.ActiveCfg = Debug|x86
 		{679EE0F0-9D96-41F8-B3B7-D0B0CFC17391}.Debug|x86.Build.0 = Debug|x86
+		{679EE0F0-9D96-41F8-B3B7-D0B0CFC17391}.Release|Any CPU.ActiveCfg = Release|x86
+		{679EE0F0-9D96-41F8-B3B7-D0B0CFC17391}.Release|Mixed Platforms.ActiveCfg = Release|x86
+		{679EE0F0-9D96-41F8-B3B7-D0B0CFC17391}.Release|Mixed Platforms.Build.0 = Release|x86
 		{679EE0F0-9D96-41F8-B3B7-D0B0CFC17391}.Release|x86.ActiveCfg = Release|x86
 		{679EE0F0-9D96-41F8-B3B7-D0B0CFC17391}.Release|x86.Build.0 = Release|x86
+		{87478B25-0A42-4074-ABE4-2583535A9DAC}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{87478B25-0A42-4074-ABE4-2583535A9DAC}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{87478B25-0A42-4074-ABE4-2583535A9DAC}.Debug|Mixed Platforms.ActiveCfg = Debug|Any CPU
+		{87478B25-0A42-4074-ABE4-2583535A9DAC}.Debug|Mixed Platforms.Build.0 = Debug|Any CPU
+		{87478B25-0A42-4074-ABE4-2583535A9DAC}.Debug|x86.ActiveCfg = Debug|Any CPU
+		{87478B25-0A42-4074-ABE4-2583535A9DAC}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{87478B25-0A42-4074-ABE4-2583535A9DAC}.Release|Any CPU.Build.0 = Release|Any CPU
+		{87478B25-0A42-4074-ABE4-2583535A9DAC}.Release|Mixed Platforms.ActiveCfg = Release|Any CPU
+		{87478B25-0A42-4074-ABE4-2583535A9DAC}.Release|Mixed Platforms.Build.0 = Release|Any CPU
+		{87478B25-0A42-4074-ABE4-2583535A9DAC}.Release|x86.ActiveCfg = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE

@@ -30,22 +30,40 @@ namespace SensorSample
 
         private readonly IEvaluationEngine evaluationEngine;
 
-        public SensorResolver(IAsynchronousFileLogger fileLogger, IEvaluationEngine evaluationEngine)
+        private readonly IVhptDoor door;
+
+        private readonly IVhptBlackHoleSubOrbitDetectionEngine blackHoleSubOrbitDetectionEngine;
+
+        private readonly IVhptTravelCoordinator travelCoordinator;
+
+        private IStateMachine<States, Events> stateMachine;
+
+        public SensorResolver(
+            IAsynchronousFileLogger fileLogger, 
+            IEvaluationEngine evaluationEngine,
+            IVhptDoor door,
+            IVhptBlackHoleSubOrbitDetectionEngine blackHoleSubOrbitDetectionEngine,
+            IVhptTravelCoordinator travelCoordinator, 
+            IStateMachine<States, Events> stateMachine)
         {
             this.fileLogger = fileLogger;
             this.evaluationEngine = evaluationEngine;
+            this.door = door;
+            this.blackHoleSubOrbitDetectionEngine = blackHoleSubOrbitDetectionEngine;
+            this.travelCoordinator = travelCoordinator;
+            this.stateMachine = stateMachine;
         }
 
         public void Resolve(IExtensionPoint<ISensor> extensionPoint)
         {
             extensionPoint.AddExtension(
                 new DoorSensor(
-                    new VhptDoor(), 
-                    new ActiveStateMachine<States, Events>(), 
+                    this.door, 
+                    this.stateMachine, 
                     this.fileLogger,
-                    new VhptTravelCoordinator(),
+                    this.travelCoordinator,
                     this.evaluationEngine));
-            extensionPoint.AddExtension(new BlackHoleSensor(new VhptBlackHoleSubOrbitDetectionEngine()));
+            extensionPoint.AddExtension(new BlackHoleSensor(this.blackHoleSubOrbitDetectionEngine));
         }
     }
 }

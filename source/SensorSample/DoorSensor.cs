@@ -204,9 +204,9 @@ namespace SensorSample
 
         private void Log(string message)
         {
-            Console.WriteLine(message);
-
             this.fileLogger.Log(message);
+
+            Console.WriteLine(message);
         }
     }
 }

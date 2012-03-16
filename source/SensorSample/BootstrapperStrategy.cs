@@ -24,26 +24,67 @@ namespace SensorSample
     using Appccelerate.Bootstrapper.Syntax;
     using Appccelerate.EvaluationEngine;
     using Appccelerate.EventBroker;
+    using Appccelerate.StateMachine;
 
     using SensorSample.Reporters;
     using SensorSample.Sirius;
 
     public class BootstrapperStrategy : AbstractStrategy<ISensor>
     {
-        private readonly IEventBroker globalEventBroker;
-        private readonly AsynchronousVhptFileLogger fileLogger;
-        private readonly IEvaluationEngine evaluationEngine;
+        private IEventBroker globalEventBroker;
 
-        public BootstrapperStrategy()
-        {
-            this.globalEventBroker = new EventBroker();
-            this.fileLogger = new AsynchronousVhptFileLogger(new ModuleController(), new VhptFileLogger());
-            this.evaluationEngine = new EvaluationEngine();
-        }
+        private IEvaluationEngine evaluationEngine;
+
+        private AsynchronousVhptFileLogger fileLogger;
 
         public override IExtensionResolver<ISensor> CreateExtensionResolver()
         {
-            return new SensorResolver(this.fileLogger, this.evaluationEngine);
+            this.globalEventBroker = this.CreateGlobalEventBroker();
+            this.evaluationEngine = new EvaluationEngine();
+            this.fileLogger = new AsynchronousVhptFileLogger(this.CreateModuleController(), this.CreateFileLogger());
+
+            return new SensorResolver(
+                this.fileLogger, 
+                this.evaluationEngine,
+                this.CreateDoor(),
+                this.CreateBlackHoleSubOrbitDetectionEngine(),
+                this.CreateTravelCoordinator(),
+                this.CreateStateMachine());
+        }
+
+        protected virtual IStateMachine<States, Events> CreateStateMachine()
+        {
+            return new ActiveStateMachine<States, Events>();
+        }
+
+        protected virtual EventBroker CreateGlobalEventBroker()
+        {
+            return new EventBroker();
+        }
+
+        protected virtual IVhptDoor CreateDoor()
+        {
+            return new VhptDoor();
+        }
+
+        protected virtual IVhptBlackHoleSubOrbitDetectionEngine CreateBlackHoleSubOrbitDetectionEngine()
+        {
+            return new VhptBlackHoleSubOrbitDetectionEngine();
+        }
+
+        protected virtual IVhptTravelCoordinator CreateTravelCoordinator()
+        {
+            return new VhptTravelCoordinator();
+        }
+
+        protected virtual IVhptFileLogger CreateFileLogger()
+        {
+            return new VhptFileLogger();
+        }
+
+        protected virtual ModuleController CreateModuleController()
+        {
+            return new ModuleController();
         }
 
         protected override void DefineRunSyntax(ISyntaxBuilder<ISensor> builder)
@@ -53,8 +94,7 @@ namespace SensorSample
                     .With(new ExtensionConfigurationSectionBehavior())
                 .Execute(() => this.InitializeEventBroker())
                 .Execute(() => this.InitializeEvaluationEngine())
-                .Execute(() => this.fileLogger.Initialize())
-                .Execute(() => this.fileLogger.Start())
+                .Execute(() => this.SetupFileLogger())
                 .Execute(sensor => sensor.StartObservation())
                     .With(new InitializeSensorBehavior())
                     .With(new RegisterOnEventBrokerBehavior(this.globalEventBroker));
@@ -86,6 +126,12 @@ namespace SensorSample
 
             this.evaluationEngine.Load(new VhptOracle());
             this.evaluationEngine.Load(new PanicModeTargetLevelOracle());
+        }
+
+        private void SetupFileLogger()
+        {
+            this.fileLogger.Initialize();
+            this.fileLogger.Start();
         }
     }
 }
