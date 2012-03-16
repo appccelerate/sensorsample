@@ -23,10 +23,11 @@ namespace SensorSample.Specification
     using Machine.Specifications;
 
     [Subject(Subjects.Door)]
-    public class When_a_door_opens : RunningApplicationSpecification
+    public class When_a_door_opens : InitializedApplicationSpecification
     {
         Because of = () =>
             {
+                RunApplication();
                 bootstrapperStrategy.Door.Opened += Raise.WithEmpty().Now;
             };
 
@@ -35,10 +36,14 @@ namespace SensorSample.Specification
     }
 
     [Subject(Subjects.Door)]
-    public class When_a_door_closes : RunningApplicationSpecification
+    public class When_a_door_closes : InitializedApplicationSpecification
     {
         Establish context = () =>
-            bootstrapperStrategy.Door.Opened += Raise.WithEmpty().Now;  // we have to open the dorr first, otherwise it cannot be closed.
+        {
+            RunApplication();
+            bootstrapperStrategy.Door.Opened += Raise.WithEmpty().Now;  // we have to open the door first, otherwise it cannot be closed.    
+        };
+
 
         Because of = () =>
         {

@@ -78,7 +78,7 @@
     <Compile Include="BlackHoleSpecifications.cs" />
     <Compile Include="DoorSpecifications.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
-    <Compile Include="RunningApplicationSpecification.cs" />
+    <Compile Include="InitializedApplicationSpecification.cs" />
     <Compile Include="Subjects.cs" />
     <Compile Include="TestableBootstrapperStrategy.cs" />
   </ItemGroup>

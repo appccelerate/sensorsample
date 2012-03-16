@@ -19,10 +19,14 @@
 namespace SensorSample.Specification
 {
     using System;
+    using System.Collections.Generic;
+    using System.Configuration;
     using System.Reflection;
 
     using Appccelerate.AsyncModule;
     using Appccelerate.AsyncModule.Events;
+    using Appccelerate.Bootstrapper;
+    using Appccelerate.Bootstrapper.Configuration;
     using Appccelerate.EventBroker;
     using Appccelerate.EventBroker.Factories;
     using Appccelerate.StateMachine;
@@ -41,6 +45,7 @@ namespace SensorSample.Specification
             this.BlackHoleSubOrbitDetectionEngine = A.Fake<IVhptBlackHoleSubOrbitDetectionEngine>();
             this.TravelCoordinator = A.Fake<IVhptTravelCoordinator>();
             this.FileLogger = A.Fake<IVhptFileLogger>();
+            this.Configuration = new Dictionary<string, IDictionary<string, string>>();
         }
 
         public IVhptDoor Door { get; private set; }
@@ -51,7 +56,9 @@ namespace SensorSample.Specification
 
         public IVhptFileLogger FileLogger { get; private set; }
 
-        protected override Sirius.IVhptDoor CreateDoor()
+        public IDictionary<string, IDictionary<string, string>> Configuration { get; set; }
+
+        protected override IVhptDoor CreateDoor()
         {
             return this.Door;
         }
@@ -90,6 +97,11 @@ namespace SensorSample.Specification
             return new PassiveStateMachine<States, Events>();
         }
 
+        protected override ExtensionConfigurationSectionBehavior CreateExtensionConfigurationSectionBehavior()
+        {
+            return new ExtensionConfigurationSectionBehavior(new TestableExtensionConfigurationSectionBehaviorFactory(this.Configuration));
+        }
+
         private void ModuleControllerOnBeforeEnqueueMessage(object sender, EnqueueMessageEventArgs enqueueMessageEventArgs)
         {
             enqueueMessageEventArgs.Cancel = true;
@@ -105,6 +117,28 @@ namespace SensorSample.Specification
             }
 
             method.Invoke(enqueueMessageEventArgs.Module, new[] { enqueueMessageEventArgs.Message });
+        }
+
+        private class TestableExtensionConfigurationSectionBehaviorFactory : DefaultExtensionConfigurationSectionBehaviorFactory, ILoadConfigurationSection
+        {
+            private readonly IDictionary<string, IDictionary<string, string>> configuration;
+
+            public TestableExtensionConfigurationSectionBehaviorFactory(IDictionary<string, IDictionary<string, string>> configuration)
+            {
+                this.configuration = configuration;
+            }
+
+            public override ILoadConfigurationSection CreateLoadConfigurationSection(IExtension extension)
+            {
+                return this;
+            }
+
+            public ConfigurationSection GetSection(string sectionName)
+            {
+                IDictionary<string, string> configurationSection;
+
+                return this.configuration.TryGetValue(sectionName, out configurationSection) ? ExtensionConfigurationSectionHelper.CreateSection(configurationSection) : null;
+            }
         }
     }
 }

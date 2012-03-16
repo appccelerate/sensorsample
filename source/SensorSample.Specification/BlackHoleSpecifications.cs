@@ -18,13 +18,18 @@
 
 namespace SensorSample.Specification
 {
+    using System.Collections.Generic;
+
     using FakeItEasy;
 
     using Machine.Specifications;
 
     [Subject(Subjects.BlackHole)]
-    public class When_a_black_hole_is_detected : RunningApplicationSpecification
+    public class When_a_black_hole_is_detected : InitializedApplicationSpecification
     {
+        Establish context = () =>
+            RunApplication();
+
         Because of = () =>
             bootstrapperStrategy.BlackHoleSubOrbitDetectionEngine.BlackHoleDetected += Raise.WithEmpty().Now;
 
@@ -35,6 +40,9 @@ namespace SensorSample.Specification
     [Subject(Subjects.BlackHole)]
     public class When_a_door_opens_and_a_black_hole_was_detected : BlackHoleDetectedSpecification
     {
+        Establish context = () =>
+            RunApplicationWithBlackHole();
+
         Because of = () =>
             bootstrapperStrategy.Door.Opened += Raise.WithEmpty().Now;
 
@@ -46,7 +54,10 @@ namespace SensorSample.Specification
     public class When_a_door_closes_and_a_black_hole_was_detected : BlackHoleDetectedSpecification
     {
         Establish context = () =>
+        {
+            RunApplicationWithBlackHole();
             bootstrapperStrategy.Door.Opened += Raise.WithEmpty().Now;
+        };
 
         Because of = () =>
             bootstrapperStrategy.Door.Closed += Raise.WithEmpty().Now;
@@ -58,15 +69,18 @@ namespace SensorSample.Specification
     public class When_a_door_closes_and_a_black_hole_was_detected_and_panic_mode_is_enabled :
         BlackHoleDetectedSpecification
     {
-        private Establish context = () =>
-        {
-            bootstrapperStrategy.Door.Opened += Raise.WithEmpty().Now;
-        };
+        Establish context = () =>
+            {
+                bootstrapperStrategy.Configuration.Add("DoorSensor", new Dictionary<string, string> { { "PanicModeEnabled", "true" } });
 
-        private Because of = () =>
+                RunApplicationWithBlackHole();
+                bootstrapperStrategy.Door.Opened += Raise.WithEmpty().Now;
+            };
+
+        Because of = () =>
             bootstrapperStrategy.Door.Closed += Raise.WithEmpty().Now;
 
-        private It should_tell_travel_coordinator_to_move_to_ground_floor =
+        It should_tell_travel_coordinator_to_move_to_ground_floor =
             () => A.CallTo(() => bootstrapperStrategy.TravelCoordinator.TravelTo(0)).MustHaveHappened();
     }
 
@@ -74,15 +88,16 @@ namespace SensorSample.Specification
     public class When_a_door_closes_and_a_black_hole_was_detected_and_panic_mode_is_disabled :
         BlackHoleDetectedSpecification
     {
-        private Establish context = () =>
+        Establish context = () =>
         {
+            RunApplicationWithBlackHole();
             bootstrapperStrategy.Door.Opened += Raise.WithEmpty().Now;
         };
 
-        private Because of = () =>
+        Because of = () =>
             bootstrapperStrategy.Door.Closed += Raise.WithEmpty().Now;
 
-        private It should_tell_travel_coordinator_to_move_to_ground_floor =
+        It should_tell_travel_coordinator_to_move_to_ground_floor =
             () => A.CallTo(() => bootstrapperStrategy.TravelCoordinator.TravelTo(42)).MustHaveHappened();
     }
 }

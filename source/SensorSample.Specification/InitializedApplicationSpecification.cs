@@ -18,13 +18,14 @@
 
 namespace SensorSample.Specification
 {
+
     using Appccelerate.Bootstrapper;
 
     using Machine.Specifications;
 
     using SensorSample.Sensors;
 
-    public class RunningApplicationSpecification
+    public class InitializedApplicationSpecification
     {
         protected static DefaultBootstrapper<ISensor> bootstrapper;
 
@@ -37,10 +38,13 @@ namespace SensorSample.Specification
                 bootstrapper = new DefaultBootstrapper<ISensor>();
 
                 bootstrapper.Initialize(bootstrapperStrategy);
-
-                bootstrapper.Run();
             };
 
         Cleanup stuff = () => bootstrapper.Dispose();
+
+        protected static void RunApplication()
+        {
+            bootstrapper.Run();
+        }
     }
 }

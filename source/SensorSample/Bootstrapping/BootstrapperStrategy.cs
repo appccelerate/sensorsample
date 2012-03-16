@@ -47,7 +47,7 @@ namespace SensorSample.Bootstrapping
             this.fileLogger = new AsynchronousVhptFileLogger(this.CreateModuleController(), this.CreateFileLogger());
 
             return new SensorResolver(
-                this.fileLogger, 
+                this.fileLogger,
                 this.evaluationEngine,
                 this.CreateDoor(),
                 this.CreateBlackHoleSubOrbitDetectionEngine(),
@@ -90,11 +90,16 @@ namespace SensorSample.Bootstrapping
             return new ModuleController();
         }
 
+        protected virtual ExtensionConfigurationSectionBehavior CreateExtensionConfigurationSectionBehavior()
+        {
+            return new ExtensionConfigurationSectionBehavior();
+        }
+
         protected override void DefineRunSyntax(ISyntaxBuilder<ISensor> builder)
         {
             builder
                 .Begin
-                    .With(new ExtensionConfigurationSectionBehavior())
+                    .With(this.CreateExtensionConfigurationSectionBehavior())
                 .Execute(() => this.InitializeEventBroker())
                 .Execute(() => this.InitializeEvaluationEngine())
                 .Execute(() => this.SetupFileLogger())

@@ -20,13 +20,18 @@ namespace SensorSample.Specification
 {
     using FakeItEasy;
 
-    using Machine.Specifications;
 
-    public class BlackHoleDetectedSpecification : RunningApplicationSpecification
+    public class BlackHoleDetectedSpecification : InitializedApplicationSpecification
     {
-        Establish context = () =>
-            {
-                bootstrapperStrategy.BlackHoleSubOrbitDetectionEngine.BlackHoleDetected += Raise.WithEmpty().Now;
-            };
+        protected static void RunApplicationWithBlackHole()
+        {
+            RunApplication();
+            BlackHoleDetected();
+        }
+
+        protected static void BlackHoleDetected()
+        {
+            bootstrapperStrategy.BlackHoleSubOrbitDetectionEngine.BlackHoleDetected += Raise.WithEmpty().Now;
+        }
     }
 }
