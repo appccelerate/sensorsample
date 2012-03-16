@@ -1,4 +1,4 @@
-﻿//-------------------------------------------------------------------------------
+//-------------------------------------------------------------------------------
 // <copyright file="BootstrapperStrategy.cs" company="Appccelerate">
 //   Copyright (c) 2008-2012
 //
@@ -16,7 +16,7 @@
 // </copyright>
 //-------------------------------------------------------------------------------
 
-namespace SensorSample
+namespace SensorSample.Bootstrapping
 {
     using Appccelerate.AsyncModule;
     using Appccelerate.Bootstrapper;
@@ -26,7 +26,10 @@ namespace SensorSample
     using Appccelerate.EventBroker;
     using Appccelerate.StateMachine;
 
+    using SensorSample.Asynchronous;
+    using SensorSample.Evaluation;
     using SensorSample.Reporters;
+    using SensorSample.Sensors;
     using SensorSample.Sirius;
 
     public class BootstrapperStrategy : AbstractStrategy<ISensor>

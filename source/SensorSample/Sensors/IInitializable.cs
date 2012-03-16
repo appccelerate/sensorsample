@@ -1,5 +1,5 @@
-﻿//-------------------------------------------------------------------------------
-// <copyright file="WhereDoesThePassangerWantToTravelTo.cs" company="Appccelerate">
+//-------------------------------------------------------------------------------
+// <copyright file="IInitializable.cs" company="Appccelerate">
 //   Copyright (c) 2008-2012
 //
 //   Licensed under the Apache License, Version 2.0 (the "License");
@@ -16,17 +16,10 @@
 // </copyright>
 //-------------------------------------------------------------------------------
 
-namespace SensorSample
+namespace SensorSample.Sensors
 {
-    using Appccelerate.EvaluationEngine;
-
-    public class WhereDoesThePassangerWantToTravelTo : Question<int, bool>
+    public interface IInitializable
     {
-        public WhereDoesThePassangerWantToTravelTo(bool panicModeEnabled)
-        {
-            this.PanicModeEnabled = panicModeEnabled;
-        }
-
-        public bool PanicModeEnabled { get; private set; }
+        void Initialize();         
     }
 }

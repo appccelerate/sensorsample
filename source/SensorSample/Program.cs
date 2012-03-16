@@ -22,7 +22,9 @@ namespace SensorSample
 
     using Appccelerate.Bootstrapper;
 
+    using SensorSample.Bootstrapping;
     using SensorSample.Reporters;
+    using SensorSample.Sensors;
 
     public static class Program
     {

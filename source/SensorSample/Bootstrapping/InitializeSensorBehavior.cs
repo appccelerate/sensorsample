@@ -1,4 +1,4 @@
-﻿//-------------------------------------------------------------------------------
+//-------------------------------------------------------------------------------
 // <copyright file="InitializeSensorBehavior.cs" company="Appccelerate">
 //   Copyright (c) 2008-2012
 //
@@ -16,13 +16,15 @@
 // </copyright>
 //-------------------------------------------------------------------------------
 
-namespace SensorSample
+namespace SensorSample.Bootstrapping
 {
     using System.Collections.Generic;
     using System.Linq;
 
     using Appccelerate.Bootstrapper;
     using Appccelerate.Formatters;
+
+    using SensorSample.Sensors;
 
     public class InitializeSensorBehavior : IBehavior<ISensor>
     {

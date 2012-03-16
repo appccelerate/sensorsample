@@ -1,4 +1,4 @@
-﻿//-------------------------------------------------------------------------------
+//-------------------------------------------------------------------------------
 // <copyright file="AsynchronousVhptFileLogger.cs" company="Appccelerate">
 //   Copyright (c) 2008-2012
 //
@@ -16,10 +16,8 @@
 // </copyright>
 //-------------------------------------------------------------------------------
 
-namespace SensorSample
+namespace SensorSample.Asynchronous
 {
-    using System;
-
     using Appccelerate.AsyncModule;
 
     using SensorSample.Sirius;
