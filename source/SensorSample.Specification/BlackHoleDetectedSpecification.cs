@@ -31,7 +31,7 @@ namespace SensorSample.Specification
 
         protected static void BlackHoleDetected()
         {
-            bootstrapperStrategy.BlackHoleSubOrbitDetectionEngine.BlackHoleDetected += Raise.WithEmpty().Now;
+            blackHoleSubOrbitDetectionEngine.BlackHoleDetected += Raise.WithEmpty().Now;
         }
     }
 }

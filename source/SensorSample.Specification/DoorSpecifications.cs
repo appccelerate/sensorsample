@@ -28,11 +28,11 @@ namespace SensorSample.Specification
         Because of = () =>
             {
                 RunApplication();
-                bootstrapperStrategy.Door.Opened += Raise.WithEmpty().Now;
+                door.Opened += Raise.WithEmpty().Now;
             };
 
         It should_write_message_to_file_logger = () =>
-            A.CallTo(() => bootstrapperStrategy.FileLogger.Log("door is open!")).MustHaveHappened();
+            A.CallTo(() => fileLogger.Log("door is open!")).MustHaveHappened();
     }
 
     [Subject(Subjects.Door)]
@@ -41,19 +41,19 @@ namespace SensorSample.Specification
         Establish context = () =>
         {
             RunApplication();
-            bootstrapperStrategy.Door.Opened += Raise.WithEmpty().Now;  // we have to open the door first, otherwise it cannot be closed.    
+            door.Opened += Raise.WithEmpty().Now;  // we have to open the door first, otherwise it cannot be closed.    
         };
 
 
         Because of = () =>
         {
-            bootstrapperStrategy.Door.Closed += Raise.WithEmpty().Now;
+            door.Closed += Raise.WithEmpty().Now;
         };
 
         It should_write_message_to_file_logger = () =>
-            A.CallTo(() => bootstrapperStrategy.FileLogger.Log("door is closed!")).MustHaveHappened();
+            A.CallTo(() => fileLogger.Log("door is closed!")).MustHaveHappened();
 
         It should_tell_travel_coordinator_to_go_to_level_specified_by_oracle = () =>
-            A.CallTo(() => bootstrapperStrategy.TravelCoordinator.TravelTo(42)).MustHaveHappened();
+            A.CallTo(() => travelCoordinator.TravelTo(42)).MustHaveHappened();
     }
 }

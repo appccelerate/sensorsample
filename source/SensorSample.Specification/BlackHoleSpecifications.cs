@@ -31,10 +31,10 @@ namespace SensorSample.Specification
             RunApplication();
 
         Because of = () =>
-            bootstrapperStrategy.BlackHoleSubOrbitDetectionEngine.BlackHoleDetected += Raise.WithEmpty().Now;
+            blackHoleSubOrbitDetectionEngine.BlackHoleDetected += Raise.WithEmpty().Now;
 
         It should_write_message_to_file_logger = () =>
-            A.CallTo(() => bootstrapperStrategy.FileLogger.Log("black hole detected! PANIC!!!")).MustHaveHappened();
+            A.CallTo(() => fileLogger.Log("black hole detected! PANIC!!!")).MustHaveHappened();
     }
 
     [Subject(Subjects.BlackHole)]
@@ -44,10 +44,10 @@ namespace SensorSample.Specification
             RunApplicationWithBlackHole();
 
         Because of = () =>
-            bootstrapperStrategy.Door.Opened += Raise.WithEmpty().Now;
+            door.Opened += Raise.WithEmpty().Now;
 
         It should_write_panic_message_to_file_logger = () =>
-            A.CallTo(() => bootstrapperStrategy.FileLogger.Log("door is open! PANIC!!!")).MustHaveHappened();
+            A.CallTo(() => fileLogger.Log("door is open! PANIC!!!")).MustHaveHappened();
     }
 
     [Subject(Subjects.BlackHole)]
@@ -56,14 +56,14 @@ namespace SensorSample.Specification
         Establish context = () =>
         {
             RunApplicationWithBlackHole();
-            bootstrapperStrategy.Door.Opened += Raise.WithEmpty().Now;
+            door.Opened += Raise.WithEmpty().Now;
         };
 
         Because of = () =>
-            bootstrapperStrategy.Door.Closed += Raise.WithEmpty().Now;
+            door.Closed += Raise.WithEmpty().Now;
 
         It should_write_panic_message_to_file_logger = () =>
-            A.CallTo(() => bootstrapperStrategy.FileLogger.Log("door is closed! PANIC!!!")).MustHaveHappened();
+            A.CallTo(() => fileLogger.Log("door is closed! PANIC!!!")).MustHaveHappened();
     }
 
     public class When_a_door_closes_and_a_black_hole_was_detected_and_panic_mode_is_enabled :
@@ -71,17 +71,17 @@ namespace SensorSample.Specification
     {
         Establish context = () =>
             {
-                bootstrapperStrategy.Configuration.Add("DoorSensor", new Dictionary<string, string> { { "PanicModeEnabled", "true" } });
+                configuration.Add("DoorSensor", new Dictionary<string, string> { { "PanicModeEnabled", "true" } });
 
                 RunApplicationWithBlackHole();
-                bootstrapperStrategy.Door.Opened += Raise.WithEmpty().Now;
+                door.Opened += Raise.WithEmpty().Now;
             };
 
         Because of = () =>
-            bootstrapperStrategy.Door.Closed += Raise.WithEmpty().Now;
+            door.Closed += Raise.WithEmpty().Now;
 
         It should_tell_travel_coordinator_to_move_to_ground_floor =
-            () => A.CallTo(() => bootstrapperStrategy.TravelCoordinator.TravelTo(0)).MustHaveHappened();
+            () => A.CallTo(() => travelCoordinator.TravelTo(0)).MustHaveHappened();
     }
 
     [Subject(Subjects.BlackHole)]
@@ -91,13 +91,13 @@ namespace SensorSample.Specification
         Establish context = () =>
         {
             RunApplicationWithBlackHole();
-            bootstrapperStrategy.Door.Opened += Raise.WithEmpty().Now;
+            door.Opened += Raise.WithEmpty().Now;
         };
 
         Because of = () =>
-            bootstrapperStrategy.Door.Closed += Raise.WithEmpty().Now;
+            door.Closed += Raise.WithEmpty().Now;
 
         It should_tell_travel_coordinator_to_move_to_ground_floor =
-            () => A.CallTo(() => bootstrapperStrategy.TravelCoordinator.TravelTo(42)).MustHaveHappened();
+            () => A.CallTo(() => travelCoordinator.TravelTo(42)).MustHaveHappened();
     }
 }

@@ -18,12 +18,14 @@
 
 namespace SensorSample.Specification
 {
+    using System.Collections.Generic;
 
     using Appccelerate.Bootstrapper;
 
     using Machine.Specifications;
 
     using SensorSample.Sensors;
+    using SensorSample.Sirius;
 
     public class InitializedApplicationSpecification
     {
@@ -31,9 +33,25 @@ namespace SensorSample.Specification
 
         protected static TestableBootstrapperStrategy bootstrapperStrategy;
 
+        protected static IVhptBlackHoleSubOrbitDetectionEngine blackHoleSubOrbitDetectionEngine;
+
+        protected static IDictionary<string, IDictionary<string, string>> configuration;
+
+        protected static IVhptDoor door;
+
+        protected static IVhptFileLogger fileLogger;
+
+        protected static IVhptTravelCoordinator travelCoordinator;
+
         Establish context = () =>
             {
                 bootstrapperStrategy = new TestableBootstrapperStrategy();
+
+                blackHoleSubOrbitDetectionEngine = bootstrapperStrategy.BlackHoleSubOrbitDetectionEngine;
+                configuration = bootstrapperStrategy.Configuration;
+                door = bootstrapperStrategy.Door;
+                fileLogger = bootstrapperStrategy.FileLogger;
+                travelCoordinator = bootstrapperStrategy.TravelCoordinator;
 
                 bootstrapper = new DefaultBootstrapper<ISensor>();
 
