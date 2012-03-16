@@ -86,7 +86,7 @@
     <Compile Include="Sirius\VhptOracle.cs" />
     <Compile Include="Sirius\IVhptFileLogger.cs" />
     <Compile Include="Sirius\IVhptTravelCoordinator.cs" />
-    <Compile Include="Eventtopics.cs" />
+    <Compile Include="EventTopics.cs" />
     <Compile Include="Program.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="Sirius\IVhptBlackHoleSubOrbitDetectionEngine.cs" />
