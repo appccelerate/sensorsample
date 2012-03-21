@@ -28,19 +28,12 @@ namespace SensorSample.Sensors
 
     public enum States
     {
-        NormalMode,
-        PanicMode,
-        DoorOpenInNormalMode,
-        DoorClosedInNormalMode,
-        DoorOpenInPanicMode,
-        DoorClosedInPanicMode
+        // TODO: add the states for the state machine here
     }
 
     public enum Events
     {
-        BlackHoleDetected,
-        DoorOpened,
-        DoorClosed
+        // TODO: add the events for the state machine here
     }
 
     public class DoorSensor : ISensor, IInitializable
@@ -72,7 +65,7 @@ namespace SensorSample.Sensors
 
         public void StartObservation()
         {
-            this.stateMachine.Start();
+            // TODO: start state machine
 
             this.door.Opened += this.HandleDoorOpened;
             this.door.Closed += this.HandleDoorClosed;
@@ -83,61 +76,24 @@ namespace SensorSample.Sensors
             this.door.Opened -= this.HandleDoorOpened;
             this.door.Closed -= this.HandleDoorClosed;
 
-            this.stateMachine.Stop();
+            // TODO: stop state machine
         }
 
-        [EventSubscription(EventTopics.BlackHoleDetected, typeof(Publisher))]
-        public void HandleBlackHoleDetection(object sender, EventArgs e)
-        {
-            this.stateMachine.Fire(Events.BlackHoleDetected);
-        }
+        // TODO: add a handler for the black hole detected event and fire an event onto the state machine
 
         public void Initialize()
         {
-            this.stateMachine.DefineHierarchyOn(States.NormalMode)
-                .WithHistoryType(HistoryType.Deep)
-                .WithInitialSubState(States.DoorClosedInNormalMode)
-                .WithSubState(States.DoorOpenInNormalMode);
-
-            this.stateMachine.DefineHierarchyOn(States.PanicMode)
-                .WithHistoryType(HistoryType.Deep)
-                .WithInitialSubState(States.DoorClosedInPanicMode)
-                .WithSubState(States.DoorOpenInPanicMode);
-
-            this.stateMachine
-                .In(States.DoorClosedInNormalMode)
-                .On(Events.BlackHoleDetected).Goto(States.DoorClosedInPanicMode)
-                .On(Events.DoorOpened).Goto(States.DoorOpenInNormalMode).Execute(this.LogDoorOpenedInNormalMode);
-
-            this.stateMachine
-                .In(States.DoorOpenInNormalMode)
-                .On(Events.BlackHoleDetected).Goto(States.DoorOpenInPanicMode)
-                .On(Events.DoorClosed).Goto(States.DoorClosedInNormalMode).Execute(this.LogDoorClosedInNormalMode);
-
-            this.stateMachine
-                .In(States.DoorClosedInPanicMode)
-                .On(Events.DoorOpened).Goto(States.DoorOpenInPanicMode).Execute(this.LogDoorOpenedInPanicMode);
-
-            this.stateMachine
-                .In(States.DoorOpenInPanicMode)
-                .On(Events.DoorClosed).Goto(States.DoorClosedInPanicMode).Execute(this.LogDoorClosedInPanicMode);
-
-            this.stateMachine
-                .In(States.PanicMode)
-                .ExecuteOnEntry(this.LogBlackHoleDetected)
-                .On(Events.BlackHoleDetected);
-
-            this.stateMachine.Initialize(States.NormalMode);
+            // TODO: define the state machine and initialize it
         }
 
         private void HandleDoorOpened(object sender, EventArgs e)
         {
-            this.stateMachine.Fire(Events.DoorOpened);
+            // TODO: fire an event onto the state machine to tell it that the door is open
         }
 
         private void HandleDoorClosed(object sender, EventArgs e)
         {
-            this.stateMachine.Fire(Events.DoorClosed);
+            // TODO: fire an event onto the state machine to tell it that the door is closed
         }
 
         private void LogBlackHoleDetected()
