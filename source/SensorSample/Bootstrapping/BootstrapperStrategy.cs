@@ -18,7 +18,6 @@
 
 namespace SensorSample.Bootstrapping
 {
-    using Appccelerate.AsyncModule;
     using Appccelerate.Bootstrapper;
     using Appccelerate.Bootstrapper.Syntax;
     using Appccelerate.EventBroker;
@@ -60,16 +59,6 @@ namespace SensorSample.Bootstrapping
         protected virtual IVhptBlackHoleSubOrbitDetectionEngine CreateBlackHoleSubOrbitDetectionEngine()
         {
             return new VhptBlackHoleSubOrbitDetectionEngine();
-        }
-
-        protected virtual IVhptFileLogger CreateFileLogger()
-        {
-            return new VhptFileLogger();
-        }
-
-        protected virtual ModuleController CreateModuleController()
-        {
-            return new ModuleController();
         }
 
         protected override void DefineRunSyntax(ISyntaxBuilder<ISensor> builder)
