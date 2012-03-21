@@ -21,7 +21,6 @@ namespace SensorSample.Bootstrapping
     using Appccelerate.Bootstrapper;
     using Appccelerate.Bootstrapper.Syntax;
     using Appccelerate.EventBroker;
-    using Appccelerate.StateMachine;
 
     using SensorSample.Reporters;
     using SensorSample.Sensors;
@@ -37,13 +36,7 @@ namespace SensorSample.Bootstrapping
            
             return new SensorResolver(
                 this.CreateDoor(),
-                this.CreateBlackHoleSubOrbitDetectionEngine(),
-                this.CreateStateMachine());
-        }
-
-        protected virtual IStateMachine<States, Events> CreateStateMachine()
-        {
-            return new ActiveStateMachine<States, Events>();
+                this.CreateBlackHoleSubOrbitDetectionEngine());
         }
 
         protected virtual EventBroker CreateGlobalEventBroker()

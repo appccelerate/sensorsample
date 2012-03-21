@@ -68,67 +68,9 @@ namespace SensorSample.Specification
             return this.BlackHoleSubOrbitDetectionEngine;
         }
 
-        protected override IVhptFileLogger CreateFileLogger()
-        {
-            return this.FileLogger;
-        }
-
-        protected override ModuleController CreateModuleController()
-        {
-            var moduleController = base.CreateModuleController();
-
-            moduleController.BeforeEnqueueMessage += this.ModuleControllerOnBeforeEnqueueMessage;
-
-            return moduleController;
-        }
-
         protected override EventBroker CreateGlobalEventBroker()
         {
             return new EventBroker(new UnitTestFactory());
-        }
-
-        protected override IStateMachine<States, Events> CreateStateMachine()
-        {
-            return new PassiveStateMachine<States, Events>();
-        }
-
-        private void ModuleControllerOnBeforeEnqueueMessage(object sender, EnqueueMessageEventArgs enqueueMessageEventArgs)
-        {
-            enqueueMessageEventArgs.Cancel = true;
-
-            MethodInfo method = null;
-
-            foreach (MethodInfo methodInfo in enqueueMessageEventArgs.Module.GetType().GetMethods())
-            {
-                if (Attribute.IsDefined(methodInfo, typeof(MessageConsumerAttribute), true))
-                {
-                    method = methodInfo;
-                }
-            }
-
-            method.Invoke(enqueueMessageEventArgs.Module, new[] { enqueueMessageEventArgs.Message });
-        }
-
-        private class TestableExtensionConfigurationSectionBehaviorFactory : DefaultExtensionConfigurationSectionBehaviorFactory, ILoadConfigurationSection
-        {
-            private readonly IDictionary<string, IDictionary<string, string>> configuration;
-
-            public TestableExtensionConfigurationSectionBehaviorFactory(IDictionary<string, IDictionary<string, string>> configuration)
-            {
-                this.configuration = configuration;
-            }
-
-            public override ILoadConfigurationSection CreateLoadConfigurationSection(IExtension extension)
-            {
-                return this;
-            }
-
-            public ConfigurationSection GetSection(string sectionName)
-            {
-                IDictionary<string, string> configurationSection;
-
-                return this.configuration.TryGetValue(sectionName, out configurationSection) ? ExtensionConfigurationSectionHelper.CreateSection(configurationSection) : null;
-            }
         }
     }
 }

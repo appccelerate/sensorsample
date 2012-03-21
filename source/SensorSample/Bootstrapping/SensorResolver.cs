@@ -19,7 +19,6 @@
 namespace SensorSample.Bootstrapping
 {
     using Appccelerate.Bootstrapper;
-    using Appccelerate.StateMachine;
 
     using SensorSample.Sensors;
     using SensorSample.Sirius;
@@ -30,24 +29,19 @@ namespace SensorSample.Bootstrapping
 
         private readonly IVhptBlackHoleSubOrbitDetectionEngine blackHoleSubOrbitDetectionEngine;
 
-        private IStateMachine<States, Events> stateMachine;
-
         public SensorResolver(
             IVhptDoor door,
-            IVhptBlackHoleSubOrbitDetectionEngine blackHoleSubOrbitDetectionEngine,
-            IStateMachine<States, Events> stateMachine)
+            IVhptBlackHoleSubOrbitDetectionEngine blackHoleSubOrbitDetectionEngine)
         {
             this.door = door;
             this.blackHoleSubOrbitDetectionEngine = blackHoleSubOrbitDetectionEngine;
-            this.stateMachine = stateMachine;
         }
 
         public void Resolve(IExtensionPoint<ISensor> extensionPoint)
         {
             extensionPoint.AddExtension(
                 new DoorSensor(
-                    this.door, 
-                    this.stateMachine));
+                    this.door));
             extensionPoint.AddExtension(new BlackHoleSensor(this.blackHoleSubOrbitDetectionEngine));
         }
     }

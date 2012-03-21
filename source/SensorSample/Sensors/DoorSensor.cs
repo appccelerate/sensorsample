@@ -22,32 +22,17 @@ namespace SensorSample.Sensors
 
     using Appccelerate.EventBroker;
     using Appccelerate.EventBroker.Handlers;
-    using Appccelerate.StateMachine;
 
     using SensorSample.Sirius;
-
-    public enum States
-    {
-        // TODO: add the states for the state machine here
-    }
-
-    public enum Events
-    {
-        // TODO: add the events for the state machine here
-    }
 
     public class DoorSensor : ISensor, IInitializable
     {
         private readonly IVhptDoor door;
 
-        private readonly IStateMachine<States, Events> stateMachine;
-
         public DoorSensor(
-            IVhptDoor door, 
-            IStateMachine<States, Events> stateMachine)
+            IVhptDoor door)
         {
             this.door = door;
-            this.stateMachine = stateMachine;
         }
 
         public string Name
@@ -65,8 +50,6 @@ namespace SensorSample.Sensors
 
         public void StartObservation()
         {
-            // TODO: start state machine
-
             this.door.Opened += this.HandleDoorOpened;
             this.door.Closed += this.HandleDoorClosed;
         }
@@ -75,54 +58,26 @@ namespace SensorSample.Sensors
         {
             this.door.Opened -= this.HandleDoorOpened;
             this.door.Closed -= this.HandleDoorClosed;
-
-            // TODO: stop state machine
         }
 
         [EventSubscription(EventTopics.BlackHoleDetected, typeof(Publisher))]
         public void HandleBlackHoleDetection(object sender, EventArgs e)
         {
-            // TODO: fire event onto state machine to tell it that a black hole was detected
+            this.Log("black hole detected!");
         }
 
         public void Initialize()
         {
-            // TODO: define the state machine and initialize it
         }
 
         private void HandleDoorOpened(object sender, EventArgs e)
         {
-            // TODO: fire an event onto the state machine to tell it that the door is open
+            this.Log("door open");
         }
 
         private void HandleDoorClosed(object sender, EventArgs e)
         {
-            // TODO: fire an event onto the state machine to tell it that the door is closed
-        }
-
-        private void LogBlackHoleDetected()
-        {
-            this.Log("black hole detected! PANIC!!!");
-        }
-
-        private void LogDoorOpenedInNormalMode()
-        {
-            this.Log("door is open!");
-        }
-
-        private void LogDoorClosedInNormalMode()
-        {
-            this.Log("door is closed!");
-        }
-
-        private void LogDoorOpenedInPanicMode()
-        {
-            this.Log("door is open! PANIC!!!");
-        }
-
-        private void LogDoorClosedInPanicMode()
-        {
-            this.Log("door is closed! PANIC!!!");
+            this.Log("door closed");
         }
 
         private void Log(string message)
