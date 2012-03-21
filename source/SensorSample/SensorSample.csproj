@@ -66,8 +66,6 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
-    <Compile Include="Asynchronous\AsynchronousVhptFileLogger.cs" />
-    <Compile Include="Asynchronous\IAsynchronousFileLogger.cs" />
     <Compile Include="Bootstrapping\BootstrapperStrategy.cs" />
     <Compile Include="Bootstrapping\InitializeSensorBehavior.cs" />
     <Compile Include="Bootstrapping\RegisterOnEventBrokerBehavior.cs" />

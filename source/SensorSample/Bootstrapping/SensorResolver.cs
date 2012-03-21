@@ -19,17 +19,13 @@
 namespace SensorSample.Bootstrapping
 {
     using Appccelerate.Bootstrapper;
-    using Appccelerate.EvaluationEngine;
     using Appccelerate.StateMachine;
 
-    using SensorSample.Asynchronous;
     using SensorSample.Sensors;
     using SensorSample.Sirius;
 
     public class SensorResolver : IExtensionResolver<ISensor>
     {
-        private readonly IAsynchronousFileLogger fileLogger;
-
         private readonly IVhptDoor door;
 
         private readonly IVhptBlackHoleSubOrbitDetectionEngine blackHoleSubOrbitDetectionEngine;
@@ -37,12 +33,10 @@ namespace SensorSample.Bootstrapping
         private IStateMachine<States, Events> stateMachine;
 
         public SensorResolver(
-            IAsynchronousFileLogger fileLogger, 
             IVhptDoor door,
             IVhptBlackHoleSubOrbitDetectionEngine blackHoleSubOrbitDetectionEngine,
             IStateMachine<States, Events> stateMachine)
         {
-            this.fileLogger = fileLogger;
             this.door = door;
             this.blackHoleSubOrbitDetectionEngine = blackHoleSubOrbitDetectionEngine;
             this.stateMachine = stateMachine;

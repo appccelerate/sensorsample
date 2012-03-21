@@ -20,12 +20,10 @@ namespace SensorSample.Sensors
 {
     using System;
 
-    using Appccelerate.EvaluationEngine;
     using Appccelerate.EventBroker;
     using Appccelerate.EventBroker.Handlers;
     using Appccelerate.StateMachine;
 
-    using SensorSample.Asynchronous;
     using SensorSample.Sirius;
 
     public enum States
@@ -51,7 +49,6 @@ namespace SensorSample.Sensors
 
         private readonly IStateMachine<States, Events> stateMachine;
 
-        // TODO: inject async file logger IAsynchronousFileLogger
         public DoorSensor(
             IVhptDoor door, 
             IStateMachine<States, Events> stateMachine)
@@ -170,8 +167,6 @@ namespace SensorSample.Sensors
 
         private void Log(string message)
         {
-            // TODO: write message to async file logger
-
             Console.WriteLine(message);
         }
     }

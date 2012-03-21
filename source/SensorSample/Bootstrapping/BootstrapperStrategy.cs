@@ -24,7 +24,6 @@ namespace SensorSample.Bootstrapping
     using Appccelerate.EventBroker;
     using Appccelerate.StateMachine;
 
-    using SensorSample.Asynchronous;
     using SensorSample.Reporters;
     using SensorSample.Sensors;
     using SensorSample.Sirius;
@@ -33,15 +32,11 @@ namespace SensorSample.Bootstrapping
     {
         private IEventBroker globalEventBroker;
 
-        private AsynchronousVhptFileLogger fileLogger;
-
         public override IExtensionResolver<ISensor> CreateExtensionResolver()
         {
             this.globalEventBroker = this.CreateGlobalEventBroker();
-            this.fileLogger = new AsynchronousVhptFileLogger(this.CreateModuleController(), this.CreateFileLogger());
-
+           
             return new SensorResolver(
-                this.fileLogger,
                 this.CreateDoor(),
                 this.CreateBlackHoleSubOrbitDetectionEngine(),
                 this.CreateStateMachine());
@@ -79,7 +74,6 @@ namespace SensorSample.Bootstrapping
 
         protected override void DefineRunSyntax(ISyntaxBuilder<ISensor> builder)
         {
-            // TODO: add iitialization and start of async file logger
             builder
                 .Execute(() => this.InitializeEventBroker())
                 .Execute(sensor => sensor.StartObservation())
@@ -93,13 +87,6 @@ namespace SensorSample.Bootstrapping
                 .Execute(sensor => sensor.StopObservation())
             .End
                 .With(new UnregisterOnEventBrokerBehavior(this.globalEventBroker));
-        }
-
-        protected override void Dispose(bool disposing)
-        {
-            base.Dispose(disposing);
-
-            // TODO: add disposing of file logger
         }
 
         private void InitializeEventBroker()
