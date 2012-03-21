@@ -97,11 +97,6 @@ namespace SensorSample.Specification
             return new PassiveStateMachine<States, Events>();
         }
 
-        protected override ExtensionConfigurationSectionBehavior CreateExtensionConfigurationSectionBehavior()
-        {
-            return new ExtensionConfigurationSectionBehavior(new TestableExtensionConfigurationSectionBehaviorFactory(this.Configuration));
-        }
-
         private void ModuleControllerOnBeforeEnqueueMessage(object sender, EnqueueMessageEventArgs enqueueMessageEventArgs)
         {
             enqueueMessageEventArgs.Cancel = true;
