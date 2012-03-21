@@ -97,7 +97,7 @@ namespace SensorSample.Specification
         Because of = () =>
             door.Closed += Raise.WithEmpty().Now;
 
-        It should_tell_travel_coordinator_to_move_to_ground_floor =
+        It should_tell_travel_coordinator_to_move_to_target_floor =
             () => A.CallTo(() => travelCoordinator.TravelTo(42)).MustHaveHappened();
     }
 }
