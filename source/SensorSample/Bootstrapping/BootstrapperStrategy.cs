@@ -79,9 +79,9 @@ namespace SensorSample.Bootstrapping
 
         protected override void DefineRunSyntax(ISyntaxBuilder<ISensor> builder)
         {
+            // TODO: add iitialization and start of async file logger
             builder
                 .Execute(() => this.InitializeEventBroker())
-                .Execute(() => this.SetupFileLogger())
                 .Execute(sensor => sensor.StartObservation())
                     .With(new InitializeSensorBehavior())
                     .With(new RegisterOnEventBrokerBehavior(this.globalEventBroker));
@@ -99,18 +99,12 @@ namespace SensorSample.Bootstrapping
         {
             base.Dispose(disposing);
 
-            this.fileLogger.Dispose();
+            // TODO: add disposing of file logger
         }
 
         private void InitializeEventBroker()
         {
             this.globalEventBroker.AddExtension(new EventBrokerReporter());
-        }
-
-        private void SetupFileLogger()
-        {
-            this.fileLogger.Initialize();
-            this.fileLogger.Start();
         }
     }
 }

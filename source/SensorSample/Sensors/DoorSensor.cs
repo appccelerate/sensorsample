@@ -51,16 +51,13 @@ namespace SensorSample.Sensors
 
         private readonly IStateMachine<States, Events> stateMachine;
 
-        private readonly IAsynchronousFileLogger fileLogger;
-
+        // TODO: inject async file logger IAsynchronousFileLogger
         public DoorSensor(
             IVhptDoor door, 
-            IStateMachine<States, Events> stateMachine, 
-            IAsynchronousFileLogger fileLogger)
+            IStateMachine<States, Events> stateMachine)
         {
             this.door = door;
             this.stateMachine = stateMachine;
-            this.fileLogger = fileLogger;
         }
 
         public string Name
@@ -173,7 +170,7 @@ namespace SensorSample.Sensors
 
         private void Log(string message)
         {
-            this.fileLogger.Log(message);
+            // TODO: write message to async file logger
 
             Console.WriteLine(message);
         }

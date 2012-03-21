@@ -36,29 +36,24 @@ namespace SensorSample.Asynchronous
 
         public void Initialize()
         {
-            this.moduleController.Initialize(this);
+            // TODO: initialize module controller
         }
 
         public void Start()
         {
-            this.moduleController.Start();
+            // TODO: start module controller
         }
 
         public void Log(string message)
         {
-            this.moduleController.EnqueueMessage(message);
+            // TODO: enqueue message on module controller
         }
 
-        [MessageConsumer]
-        public void ConsumeMessage(string message)
-        {
-            this.decoratedVhptFileLogger.Log(message);
-        }
+        // TODO: add consumer method for message that writes message to decorated file logger
 
         public void Dispose()
         {
-            this.moduleController.Stop();
-            this.decoratedVhptFileLogger.Dispose();
+            // TODO: dispose module controller and decorated file logger
         }
     }
 }
