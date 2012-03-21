@@ -37,21 +37,14 @@ namespace SensorSample.Bootstrapping
             return new VhptDoor();
         }
 
-        protected virtual IVhptBlackHoleSubOrbitDetectionEngine CreateBlackHoleSubOrbitDetectionEngine()
-        {
-            return new VhptBlackHoleSubOrbitDetectionEngine();
-        }
-
         protected override void DefineRunSyntax(ISyntaxBuilder<ISensor> builder)
         {
-            builder
-                .Execute(sensor => sensor.StartObservation());
+            // TODO: add run syntax that starts observation of the door sensor
         }
 
         protected override void DefineShutdownSyntax(ISyntaxBuilder<ISensor> builder)
         {
-            builder
-                .Execute(sensor => sensor.StopObservation());
+            // TODO: add shutdown syntax that stops observation of the door sensor
         }
     }
 }

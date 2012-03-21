@@ -71,12 +71,11 @@
     <Compile Include="Reporters\BootstrapperReporter.cs" />
     <Compile Include="Sensors\DoorSensor.cs" />
     <Compile Include="Sensors\ISensor.cs" />
+    <Compile Include="Sirius\IVhptBlackHoleSubOrbitDetectionEngine.cs" />
     <Compile Include="Sirius\IVhptFileLogger.cs" />
     <Compile Include="Sirius\IVhptTravelCoordinator.cs" />
-    <Compile Include="EventTopics.cs" />
     <Compile Include="Program.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
-    <Compile Include="Sirius\IVhptBlackHoleSubOrbitDetectionEngine.cs" />
     <Compile Include="Sirius\IVhptDoor.cs" />
   </ItemGroup>
   <ItemGroup>

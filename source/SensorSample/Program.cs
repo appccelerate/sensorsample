@@ -30,19 +30,16 @@ namespace SensorSample
     {
         public static void Main(string[] args)
         {
-            using (var bootstrapper = new DefaultBootstrapper<ISensor>(new BootstrapperReporter()))
-            {
-                bootstrapper.Initialize(new BootstrapperStrategy());
+            // TODO: create bootstrapper and initialize it with the BootstrapperStrategy
+            
+            PrintHeader();
 
-                PrintHeader();
+            // TODO: run the bootstrapper
+            
+            PrintBody();
 
-                bootstrapper.Run();
-
-                PrintBody();
-
-                bootstrapper.Shutdown();
-            }
-
+            // TODO: shutdown the bootstrapper
+            
             PrintFooter();
         }
 

@@ -35,9 +35,7 @@ namespace SensorSample.Bootstrapping
 
         public void Resolve(IExtensionPoint<ISensor> extensionPoint)
         {
-            extensionPoint.AddExtension(
-                new DoorSensor(
-                    this.door));
+            // TODO: add door sensor for this.door as an extension
         }
     }
 }
