@@ -20,12 +20,9 @@ namespace SensorSample.Sensors
 {
     using System;
 
-    using Appccelerate.EventBroker;
-    using Appccelerate.EventBroker.Handlers;
-
     using SensorSample.Sirius;
 
-    public class DoorSensor : ISensor, IInitializable
+    public class DoorSensor : ISensor
     {
         private readonly IVhptDoor door;
 
@@ -58,16 +55,6 @@ namespace SensorSample.Sensors
         {
             this.door.Opened -= this.HandleDoorOpened;
             this.door.Closed -= this.HandleDoorClosed;
-        }
-
-        [EventSubscription(EventTopics.BlackHoleDetected, typeof(Publisher))]
-        public void HandleBlackHoleDetection(object sender, EventArgs e)
-        {
-            this.Log("black hole detected!");
-        }
-
-        public void Initialize()
-        {
         }
 
         private void HandleDoorOpened(object sender, EventArgs e)

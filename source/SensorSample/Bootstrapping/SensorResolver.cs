@@ -27,14 +27,10 @@ namespace SensorSample.Bootstrapping
     {
         private readonly IVhptDoor door;
 
-        private readonly IVhptBlackHoleSubOrbitDetectionEngine blackHoleSubOrbitDetectionEngine;
-
         public SensorResolver(
-            IVhptDoor door,
-            IVhptBlackHoleSubOrbitDetectionEngine blackHoleSubOrbitDetectionEngine)
+            IVhptDoor door)
         {
             this.door = door;
-            this.blackHoleSubOrbitDetectionEngine = blackHoleSubOrbitDetectionEngine;
         }
 
         public void Resolve(IExtensionPoint<ISensor> extensionPoint)
@@ -42,7 +38,6 @@ namespace SensorSample.Bootstrapping
             extensionPoint.AddExtension(
                 new DoorSensor(
                     this.door));
-            extensionPoint.AddExtension(new BlackHoleSensor(this.blackHoleSubOrbitDetectionEngine));
         }
     }
 }

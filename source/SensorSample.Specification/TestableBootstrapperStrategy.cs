@@ -29,7 +29,6 @@ namespace SensorSample.Specification
     using Appccelerate.Bootstrapper.Configuration;
     using Appccelerate.EventBroker;
     using Appccelerate.EventBroker.Factories;
-    using Appccelerate.StateMachine;
 
     using FakeItEasy;
 
@@ -66,11 +65,6 @@ namespace SensorSample.Specification
         protected override IVhptBlackHoleSubOrbitDetectionEngine CreateBlackHoleSubOrbitDetectionEngine()
         {
             return this.BlackHoleSubOrbitDetectionEngine;
-        }
-
-        protected override EventBroker CreateGlobalEventBroker()
-        {
-            return new EventBroker(new UnitTestFactory());
         }
     }
 }

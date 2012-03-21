@@ -20,28 +20,16 @@ namespace SensorSample.Bootstrapping
 {
     using Appccelerate.Bootstrapper;
     using Appccelerate.Bootstrapper.Syntax;
-    using Appccelerate.EventBroker;
 
-    using SensorSample.Reporters;
     using SensorSample.Sensors;
     using SensorSample.Sirius;
 
     public class BootstrapperStrategy : AbstractStrategy<ISensor>
     {
-        private IEventBroker globalEventBroker;
-
         public override IExtensionResolver<ISensor> CreateExtensionResolver()
         {
-            this.globalEventBroker = this.CreateGlobalEventBroker();
-           
             return new SensorResolver(
-                this.CreateDoor(),
-                this.CreateBlackHoleSubOrbitDetectionEngine());
-        }
-
-        protected virtual EventBroker CreateGlobalEventBroker()
-        {
-            return new EventBroker();
+                this.CreateDoor());
         }
 
         protected virtual IVhptDoor CreateDoor()
@@ -57,23 +45,13 @@ namespace SensorSample.Bootstrapping
         protected override void DefineRunSyntax(ISyntaxBuilder<ISensor> builder)
         {
             builder
-                .Execute(() => this.InitializeEventBroker())
-                .Execute(sensor => sensor.StartObservation())
-                    .With(new InitializeSensorBehavior())
-                    .With(new RegisterOnEventBrokerBehavior(this.globalEventBroker));
+                .Execute(sensor => sensor.StartObservation());
         }
 
         protected override void DefineShutdownSyntax(ISyntaxBuilder<ISensor> builder)
         {
             builder
-                .Execute(sensor => sensor.StopObservation())
-            .End
-                .With(new UnregisterOnEventBrokerBehavior(this.globalEventBroker));
-        }
-
-        private void InitializeEventBroker()
-        {
-            this.globalEventBroker.AddExtension(new EventBrokerReporter());
+                .Execute(sensor => sensor.StopObservation());
         }
     }
 }
