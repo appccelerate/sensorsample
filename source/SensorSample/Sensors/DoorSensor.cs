@@ -82,11 +82,6 @@ namespace SensorSample.Sensors
             }
         }
 
-        public bool PanicModeEnabled
-        {
-            get; set;
-        }
-
         public string Describe()
         {
             return "The door sensor detects opening and closing of doors";
@@ -164,7 +159,7 @@ namespace SensorSample.Sensors
 
         private void DetermineTargetLevel()
         {
-            int result = this.evaluationEngine.Answer(new WhereDoesThePassangerWantToTravelTo(this.PanicModeEnabled), this.inPanicMode);
+            int result = this.evaluationEngine.Answer(new WhereDoesThePassangerWantToTravelTo(), this.inPanicMode);
 
             this.travelCoordinator.TravelTo(result);
         }
