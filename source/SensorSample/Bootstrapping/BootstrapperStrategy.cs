@@ -90,16 +90,10 @@ namespace SensorSample.Bootstrapping
             return new ModuleController();
         }
 
-        protected virtual ExtensionConfigurationSectionBehavior CreateExtensionConfigurationSectionBehavior()
-        {
-            return new ExtensionConfigurationSectionBehavior();
-        }
-
         protected override void DefineRunSyntax(ISyntaxBuilder<ISensor> builder)
         {
+            // TODO: add behavior at start of bootstrapping that load configuration from App.config
             builder
-                .Begin
-                    .With(this.CreateExtensionConfigurationSectionBehavior())
                 .Execute(() => this.InitializeEventBroker())
                 .Execute(() => this.InitializeEvaluationEngine())
                 .Execute(() => this.SetupFileLogger())
