@@ -68,11 +68,6 @@ namespace SensorSample.Specification
             return this.BlackHoleSubOrbitDetectionEngine;
         }
 
-        protected override IVhptTravelCoordinator CreateTravelCoordinator()
-        {
-            return this.TravelCoordinator;
-        }
-
         protected override IVhptFileLogger CreateFileLogger()
         {
             return this.FileLogger;
