@@ -56,24 +56,16 @@ namespace SensorSample.Bootstrapping
 
         protected override void DefineRunSyntax(ISyntaxBuilder<ISensor> builder)
         {
+            // TODO: add behavior to register sensors on event broker
             builder
-                .Execute(() => this.InitializeEventBroker())
-                .Execute(sensor => sensor.StartObservation())
-                    .With(new InitializeSensorBehavior())
-                    .With(new RegisterOnEventBrokerBehavior(this.globalEventBroker));
+                .Execute(sensor => sensor.StartObservation());
         }
 
         protected override void DefineShutdownSyntax(ISyntaxBuilder<ISensor> builder)
         {
+            // TODO: add behavior at end of shutdown that unregisters all sensors from the event broker.
             builder
-                .Execute(sensor => sensor.StopObservation())
-            .End
-                .With(new UnregisterOnEventBrokerBehavior(this.globalEventBroker));
-        }
-
-        private void InitializeEventBroker()
-        {
-            this.globalEventBroker.AddExtension(new EventBrokerReporter());
+                .Execute(sensor => sensor.StopObservation());
         }
     }
 }

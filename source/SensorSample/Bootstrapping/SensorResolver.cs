@@ -42,7 +42,7 @@ namespace SensorSample.Bootstrapping
             extensionPoint.AddExtension(
                 new DoorSensor(
                     this.door));
-            extensionPoint.AddExtension(new BlackHoleSensor(this.blackHoleSubOrbitDetectionEngine));
+            // TODO: add black hole sensor to sensors
         }
     }
 }

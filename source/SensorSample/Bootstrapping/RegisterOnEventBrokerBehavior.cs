@@ -25,31 +25,14 @@ namespace SensorSample.Bootstrapping
 
     using SensorSample.Sensors;
 
-    public class RegisterOnEventBrokerBehavior : IBehavior<ISensor>
+    // TODO: Implement this class as a bootstrapper behavior that rgisters all sensors on the event broker
+    public class RegisterOnEventBrokerBehavior
     {
         private readonly IEventBroker globalEventBroker;
 
         public RegisterOnEventBrokerBehavior(IEventBroker globalEventBroker)
         {
             this.globalEventBroker = globalEventBroker;
-        }
-
-        public string Name
-        {
-            get { return "Register on global event broker behavior"; }
-        }
-
-        public string Describe()
-        {
-            return "registers sensors on the global event broker";
-        }
-
-        public void Behave(IEnumerable<ISensor> extensions)
-        {
-            foreach (var extension in extensions)
-            {
-                this.globalEventBroker.Register(extension);
-            }
         }
     }
 }

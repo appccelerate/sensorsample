@@ -67,7 +67,6 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="Bootstrapping\BootstrapperStrategy.cs" />
-    <Compile Include="Bootstrapping\InitializeSensorBehavior.cs" />
     <Compile Include="Bootstrapping\RegisterOnEventBrokerBehavior.cs" />
     <Compile Include="Bootstrapping\SensorResolver.cs" />
     <Compile Include="Bootstrapping\UnregisterOnEventBrokerBehavior.cs" />
@@ -75,7 +74,6 @@
     <Compile Include="Reporters\EventBrokerReporter.cs" />
     <Compile Include="Sensors\BlackHoleSensor.cs" />
     <Compile Include="Sensors\DoorSensor.cs" />
-    <Compile Include="Sensors\IInitializable.cs" />
     <Compile Include="Sensors\ISensor.cs" />
     <Compile Include="Sirius\IVhptFileLogger.cs" />
     <Compile Include="Sirius\IVhptTravelCoordinator.cs" />

@@ -33,9 +33,6 @@ namespace SensorSample.Sensors
             this.detectionEngine = detectionEngine;
         }
 
-        [EventPublication(EventTopics.BlackHoleDetected)]
-        public event EventHandler BlackHoleDetected = delegate { };
-
         public string Name
         {
             get { return "Black Hole Sensor"; }
@@ -58,7 +55,7 @@ namespace SensorSample.Sensors
 
         private void HandleBlackHoleDetected(object sender, EventArgs e)
         {
-            this.BlackHoleDetected(sender, e);
+            // TODO: fire event to the event broker when a black hole is detected
         }
     }
 }

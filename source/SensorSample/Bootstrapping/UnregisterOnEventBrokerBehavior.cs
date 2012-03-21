@@ -25,31 +25,14 @@ namespace SensorSample.Bootstrapping
 
     using SensorSample.Sensors;
 
-    public class UnregisterOnEventBrokerBehavior : IBehavior<ISensor>
+    // TODO: implement this class as a bootstrapper behavior that unregisters all sensors from the event broker
+    public class UnregisterOnEventBrokerBehavior
     {
         private readonly IEventBroker globalEventBroker;
 
         public UnregisterOnEventBrokerBehavior(IEventBroker globalEventBroker)
         {
             this.globalEventBroker = globalEventBroker;
-        }
-
-        public string Name
-        {
-            get { return "Unregister on global event broker behavior"; }
-        }
-
-        public string Describe()
-        {
-            return "unregisters sensors on the global event broker";
-        }
-
-        public void Behave(IEnumerable<ISensor> extensions)
-        {
-            foreach (var extension in extensions)
-            {
-                this.globalEventBroker.Unregister(extension);
-            }
         }
     }
 }
