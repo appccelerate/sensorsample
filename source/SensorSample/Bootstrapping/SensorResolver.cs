@@ -30,29 +30,21 @@ namespace SensorSample.Bootstrapping
     {
         private readonly IAsynchronousFileLogger fileLogger;
 
-        private readonly IEvaluationEngine evaluationEngine;
-
         private readonly IVhptDoor door;
 
         private readonly IVhptBlackHoleSubOrbitDetectionEngine blackHoleSubOrbitDetectionEngine;
-
-        private readonly IVhptTravelCoordinator travelCoordinator;
 
         private IStateMachine<States, Events> stateMachine;
 
         public SensorResolver(
             IAsynchronousFileLogger fileLogger, 
-            IEvaluationEngine evaluationEngine,
             IVhptDoor door,
             IVhptBlackHoleSubOrbitDetectionEngine blackHoleSubOrbitDetectionEngine,
-            IVhptTravelCoordinator travelCoordinator, 
             IStateMachine<States, Events> stateMachine)
         {
             this.fileLogger = fileLogger;
-            this.evaluationEngine = evaluationEngine;
             this.door = door;
             this.blackHoleSubOrbitDetectionEngine = blackHoleSubOrbitDetectionEngine;
-            this.travelCoordinator = travelCoordinator;
             this.stateMachine = stateMachine;
         }
 

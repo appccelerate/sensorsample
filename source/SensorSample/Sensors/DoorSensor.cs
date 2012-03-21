@@ -26,7 +26,6 @@ namespace SensorSample.Sensors
     using Appccelerate.StateMachine;
 
     using SensorSample.Asynchronous;
-    using SensorSample.Evaluation;
     using SensorSample.Sirius;
 
     public enum States
@@ -54,9 +53,6 @@ namespace SensorSample.Sensors
 
         private readonly IAsynchronousFileLogger fileLogger;
 
-        // TODO: add a flag to keep track whether a black hole was detected and we are in panic mode
-
-        // TODO: inject TravelCoordinator and EvaluationEngine
         public DoorSensor(
             IVhptDoor door, 
             IStateMachine<States, Events> stateMachine, 
@@ -104,7 +100,6 @@ namespace SensorSample.Sensors
 
         public void Initialize()
         {
-            // TODO: add transition actions so that you know when a black hole was detected and to tell the travel coordinator where to go to.
             this.stateMachine.DefineHierarchyOn(States.NormalMode)
                 .WithHistoryType(HistoryType.Deep)
                 .WithInitialSubState(States.DoorClosedInNormalMode)

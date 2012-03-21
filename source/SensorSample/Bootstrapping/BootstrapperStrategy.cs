@@ -20,14 +20,11 @@ namespace SensorSample.Bootstrapping
 {
     using Appccelerate.AsyncModule;
     using Appccelerate.Bootstrapper;
-    using Appccelerate.Bootstrapper.Configuration;
     using Appccelerate.Bootstrapper.Syntax;
-    using Appccelerate.EvaluationEngine;
     using Appccelerate.EventBroker;
     using Appccelerate.StateMachine;
 
     using SensorSample.Asynchronous;
-    using SensorSample.Evaluation;
     using SensorSample.Reporters;
     using SensorSample.Sensors;
     using SensorSample.Sirius;
@@ -36,22 +33,17 @@ namespace SensorSample.Bootstrapping
     {
         private IEventBroker globalEventBroker;
 
-        private IEvaluationEngine evaluationEngine;
-
         private AsynchronousVhptFileLogger fileLogger;
 
         public override IExtensionResolver<ISensor> CreateExtensionResolver()
         {
             this.globalEventBroker = this.CreateGlobalEventBroker();
-            this.evaluationEngine = new EvaluationEngine();
             this.fileLogger = new AsynchronousVhptFileLogger(this.CreateModuleController(), this.CreateFileLogger());
 
             return new SensorResolver(
                 this.fileLogger,
-                this.evaluationEngine,
                 this.CreateDoor(),
                 this.CreateBlackHoleSubOrbitDetectionEngine(),
-                this.CreateTravelCoordinator(),
                 this.CreateStateMachine());
         }
 
@@ -75,11 +67,6 @@ namespace SensorSample.Bootstrapping
             return new VhptBlackHoleSubOrbitDetectionEngine();
         }
 
-        protected virtual IVhptTravelCoordinator CreateTravelCoordinator()
-        {
-            return new VhptTravelCoordinator();
-        }
-
         protected virtual IVhptFileLogger CreateFileLogger()
         {
             return new VhptFileLogger();
@@ -92,7 +79,6 @@ namespace SensorSample.Bootstrapping
 
         protected override void DefineRunSyntax(ISyntaxBuilder<ISensor> builder)
         {
-            // TODO: add initialization of EvaluationEngine and load the modules Sirius.VhptOracle and Evaluation.PanicModeTargetLevelOracle
             builder
                 .Execute(() => this.InitializeEventBroker())
                 .Execute(() => this.SetupFileLogger())
