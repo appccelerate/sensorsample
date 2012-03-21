@@ -92,9 +92,9 @@ namespace SensorSample.Bootstrapping
 
         protected override void DefineRunSyntax(ISyntaxBuilder<ISensor> builder)
         {
+            // TODO: add initialization of EvaluationEngine and load the modules Sirius.VhptOracle and Evaluation.PanicModeTargetLevelOracle
             builder
                 .Execute(() => this.InitializeEventBroker())
-                .Execute(() => this.InitializeEvaluationEngine())
                 .Execute(() => this.SetupFileLogger())
                 .Execute(sensor => sensor.StartObservation())
                     .With(new InitializeSensorBehavior())
@@ -119,14 +119,6 @@ namespace SensorSample.Bootstrapping
         private void InitializeEventBroker()
         {
             this.globalEventBroker.AddExtension(new EventBrokerReporter());
-        }
-
-        private void InitializeEvaluationEngine()
-        {
-            this.evaluationEngine.SetLogExtension(new EvaluationEngineReporter());
-
-            this.evaluationEngine.Load(new VhptOracle());
-            this.evaluationEngine.Load(new PanicModeTargetLevelOracle());
         }
 
         private void SetupFileLogger()

@@ -62,9 +62,7 @@ namespace SensorSample.Bootstrapping
                 new DoorSensor(
                     this.door, 
                     this.stateMachine, 
-                    this.fileLogger,
-                    this.travelCoordinator,
-                    this.evaluationEngine));
+                    this.fileLogger));
             extensionPoint.AddExtension(new BlackHoleSensor(this.blackHoleSubOrbitDetectionEngine));
         }
     }

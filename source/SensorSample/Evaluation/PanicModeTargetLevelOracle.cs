@@ -26,8 +26,8 @@ namespace SensorSample.Evaluation
     {
         public void Load(ISolutionDefinitionHost solutionDefinitionHost)
         {
-            solutionDefinitionHost.SolveWhereDoesThePassengerWantToTravelTo()
-                .ByEvaluating((question, inPanicMode) => inPanicMode ? 0 : default(int?));
+            // TODO: add expression that answers the question WhereDoesThePassangerWantToTravelTo
+            solutionDefinitionHost.SolveWhereDoesThePassengerWantToTravelTo();
         }
     }
 }
