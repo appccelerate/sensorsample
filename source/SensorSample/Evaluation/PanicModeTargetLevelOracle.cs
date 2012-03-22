@@ -26,7 +26,7 @@ namespace SensorSample.Evaluation
     {
         public void Load(ISolutionDefinitionHost solutionDefinitionHost)
         {
-            // TODO: add expression that answers the question WhereDoesThePassangerWantToTravelTo
+            // TODO: add expression that answers the question WhereDoesThePassengerWantToTravelTo
             solutionDefinitionHost.SolveWhereDoesThePassengerWantToTravelTo();
         }
     }
