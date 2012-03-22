@@ -36,7 +36,9 @@ namespace SensorSample.Sensors
         // TODO: add the events for the state machine here
     }
 
-    public class DoorSensor : ISensor, IInitializable
+
+    // TODO: make DoorSensor IInitializable and use Initialize method to define and initialize the state machine
+    public class DoorSensor : ISensor
     {
         private readonly IVhptDoor door;
 
@@ -83,11 +85,6 @@ namespace SensorSample.Sensors
         public void HandleBlackHoleDetection(object sender, EventArgs e)
         {
             // TODO: fire event onto state machine to tell it that a black hole was detected
-        }
-
-        public void Initialize()
-        {
-            // TODO: define the state machine and initialize it
         }
 
         private void HandleDoorOpened(object sender, EventArgs e)

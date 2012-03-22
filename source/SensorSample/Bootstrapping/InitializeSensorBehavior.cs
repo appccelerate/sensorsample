@@ -26,24 +26,8 @@ namespace SensorSample.Bootstrapping
 
     using SensorSample.Sensors;
 
-    public class InitializeSensorBehavior : IBehavior<ISensor>
+    // TODO: implement as bootstrapper behavior that initializes all extensions of type IInitializable
+    public class InitializeSensorBehavior
     {
-        public string Name
-        {
-            get { return "Initialize sensor behavior"; }
-        }
-
-        public string Describe()
-        {
-            return "initializes sensors that implement " + typeof(IInitializable).FullNameToString();
-        }
-
-        public void Behave(IEnumerable<ISensor> extensions)
-        {
-            foreach (var initializable in extensions.OfType<IInitializable>())
-            {
-                initializable.Initialize();
-            }
-        }
     }
 }

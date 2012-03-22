@@ -63,10 +63,10 @@ namespace SensorSample.Bootstrapping
 
         protected override void DefineRunSyntax(ISyntaxBuilder<ISensor> builder)
         {
+            // TODO: add initialize sensor behavior to run syntax
             builder
                 .Execute(() => this.InitializeEventBroker())
                 .Execute(sensor => sensor.StartObservation())
-                    .With(new InitializeSensorBehavior())
                     .With(new RegisterOnEventBrokerBehavior(this.globalEventBroker));
         }
 
