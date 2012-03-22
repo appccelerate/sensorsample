@@ -26,6 +26,7 @@ namespace SensorSample.Evaluation
     {
         public void Load(ISolutionDefinitionHost solutionDefinitionHost)
         {
+            // TODO: extend the solution definition so that it takes into consideration whether panic mode is enabled (use property on question)
             solutionDefinitionHost.SolveWhereDoesThePassengerWantToTravelTo()
                 .ByEvaluating((question, inPanicMode) => inPanicMode ? 0 : default(int?));
         }

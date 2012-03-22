@@ -46,6 +46,7 @@ namespace SensorSample.Sensors
         DoorClosed
     }
 
+    // TODO: add a property that can be set from the configuration (PanicModeEnabled)
     public class DoorSensor : ISensor, IInitializable
     {
         private readonly IVhptDoor door;
@@ -159,6 +160,7 @@ namespace SensorSample.Sensors
 
         private void DetermineTargetLevel()
         {
+            // TODO: extend the question so that you can pass whether panic mode is enabled in the constructor
             int result = this.evaluationEngine.Answer(new WhereDoesThePassangerWantToTravelTo(), this.inPanicMode);
 
             this.travelCoordinator.TravelTo(result);
