@@ -87,7 +87,7 @@ namespace SensorSample.Bootstrapping
 
         protected virtual ModuleController CreateModuleController()
         {
-            return new ModuleController();
+            return new ModuleController { LogExtension = new AsyncModuleReporter() };
         }
 
         protected virtual ExtensionConfigurationSectionBehavior CreateExtensionConfigurationSectionBehavior()

@@ -75,6 +75,7 @@
     <Compile Include="Bootstrapping\UnregisterOnEventBrokerBehavior.cs" />
     <Compile Include="Evaluation\PanicModeTargetLevelOracle.cs" />
     <Compile Include="Evaluation\WhereDoesThePassangerWantToTravelTo.cs" />
+    <Compile Include="Reporters\AsyncModuleReporter.cs" />
     <Compile Include="Reporters\BootstrapperReporter.cs" />
     <Compile Include="Reporters\EvaluationEngineReporter.cs" />
     <Compile Include="Reporters\EventBrokerReporter.cs" />
