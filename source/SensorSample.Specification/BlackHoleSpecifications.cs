@@ -66,6 +66,7 @@ namespace SensorSample.Specification
             A.CallTo(() => fileLogger.Log("door is closed! PANIC!!!")).MustHaveHappened();
     }
 
+    [Subject(Subjects.BlackHole)]
     public class When_a_door_closes_and_a_black_hole_was_detected_and_panic_mode_is_enabled :
         BlackHoleDetectedSpecification
     {
