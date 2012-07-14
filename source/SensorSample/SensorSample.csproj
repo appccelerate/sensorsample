@@ -36,23 +36,23 @@
     <WarningLevel>4</WarningLevel>
   </PropertyGroup>
   <ItemGroup>
-    <Reference Include="Appccelerate.AsyncModule">
-      <HintPath>..\packages\Appccelerate.AsyncModule.1.0.21-alpha\lib\Net40\Appccelerate.AsyncModule.dll</HintPath>
+    <Reference Include="Appccelerate.AsyncModule, Version=1.0.0.0, Culture=neutral, PublicKeyToken=917bca444d1f2b4c, processorArchitecture=MSIL">
+      <HintPath>..\packages\Appccelerate.AsyncModule.1.0.29\lib\Net40\Appccelerate.AsyncModule.dll</HintPath>
     </Reference>
-    <Reference Include="Appccelerate.Bootstrapper">
-      <HintPath>..\packages\Appccelerate.Bootstrapper.1.0.21-alpha\lib\Net40\Appccelerate.Bootstrapper.dll</HintPath>
+    <Reference Include="Appccelerate.Bootstrapper, Version=1.0.0.0, Culture=neutral, PublicKeyToken=917bca444d1f2b4c, processorArchitecture=MSIL">
+      <HintPath>..\packages\Appccelerate.Bootstrapper.1.0.29\lib\Net40\Appccelerate.Bootstrapper.dll</HintPath>
     </Reference>
-    <Reference Include="Appccelerate.EvaluationEngine">
-      <HintPath>..\packages\Appccelerate.EvaluationEngine.1.0.21-alpha\lib\Net40\Appccelerate.EvaluationEngine.dll</HintPath>
+    <Reference Include="Appccelerate.EvaluationEngine, Version=1.0.0.0, Culture=neutral, PublicKeyToken=917bca444d1f2b4c, processorArchitecture=MSIL">
+      <HintPath>..\packages\Appccelerate.EvaluationEngine.1.0.29\lib\Net40\Appccelerate.EvaluationEngine.dll</HintPath>
     </Reference>
-    <Reference Include="Appccelerate.EventBroker">
-      <HintPath>..\packages\Appccelerate.EventBroker.1.0.21-alpha\lib\Net40\Appccelerate.EventBroker.dll</HintPath>
+    <Reference Include="Appccelerate.EventBroker, Version=1.0.0.0, Culture=neutral, PublicKeyToken=917bca444d1f2b4c, processorArchitecture=MSIL">
+      <HintPath>..\packages\Appccelerate.EventBroker.1.0.29\lib\Net40\Appccelerate.EventBroker.dll</HintPath>
     </Reference>
-    <Reference Include="Appccelerate.Fundamentals">
-      <HintPath>..\packages\Appccelerate.Fundamentals.1.0.21-alpha\lib\Net40\Appccelerate.Fundamentals.dll</HintPath>
+    <Reference Include="Appccelerate.Fundamentals, Version=1.0.0.0, Culture=neutral, PublicKeyToken=917bca444d1f2b4c, processorArchitecture=MSIL">
+      <HintPath>..\packages\Appccelerate.Fundamentals.1.0.29\lib\Net40\Appccelerate.Fundamentals.dll</HintPath>
     </Reference>
-    <Reference Include="Appccelerate.StateMachine">
-      <HintPath>..\packages\Appccelerate.StateMachine.1.0.21-alpha\lib\Net40\Appccelerate.StateMachine.dll</HintPath>
+    <Reference Include="Appccelerate.StateMachine, Version=1.0.0.0, Culture=neutral, PublicKeyToken=917bca444d1f2b4c, processorArchitecture=MSIL">
+      <HintPath>..\packages\Appccelerate.StateMachine.1.0.29\lib\Net40\Appccelerate.StateMachine.dll</HintPath>
     </Reference>
     <Reference Include="System" />
     <Reference Include="System.Core" />

@@ -35,34 +35,34 @@
   </PropertyGroup>
   <ItemGroup>
     <Reference Include="Appccelerate.AsyncModule">
-      <HintPath>..\packages\Appccelerate.AsyncModule.1.0.21-alpha\lib\Net40\Appccelerate.AsyncModule.dll</HintPath>
+      <HintPath>..\packages\Appccelerate.AsyncModule.1.0.29\lib\Net40\Appccelerate.AsyncModule.dll</HintPath>
     </Reference>
     <Reference Include="Appccelerate.Bootstrapper">
-      <HintPath>..\packages\Appccelerate.Bootstrapper.1.0.21-alpha\lib\Net40\Appccelerate.Bootstrapper.dll</HintPath>
+      <HintPath>..\packages\Appccelerate.Bootstrapper.1.0.29\lib\Net40\Appccelerate.Bootstrapper.dll</HintPath>
     </Reference>
     <Reference Include="Appccelerate.EvaluationEngine">
-      <HintPath>..\packages\Appccelerate.EvaluationEngine.1.0.21-alpha\lib\Net40\Appccelerate.EvaluationEngine.dll</HintPath>
+      <HintPath>..\packages\Appccelerate.EvaluationEngine.1.0.29\lib\Net40\Appccelerate.EvaluationEngine.dll</HintPath>
     </Reference>
     <Reference Include="Appccelerate.EventBroker">
-      <HintPath>..\packages\Appccelerate.EventBroker.1.0.21-alpha\lib\Net40\Appccelerate.EventBroker.dll</HintPath>
+      <HintPath>..\packages\Appccelerate.EventBroker.1.0.29\lib\Net40\Appccelerate.EventBroker.dll</HintPath>
     </Reference>
     <Reference Include="Appccelerate.Fundamentals">
-      <HintPath>..\packages\Appccelerate.Fundamentals.1.0.21-alpha\lib\Net40\Appccelerate.Fundamentals.dll</HintPath>
+      <HintPath>..\packages\Appccelerate.Fundamentals.1.0.29\lib\Net40\Appccelerate.Fundamentals.dll</HintPath>
     </Reference>
     <Reference Include="Appccelerate.StateMachine">
-      <HintPath>..\packages\Appccelerate.StateMachine.1.0.21-alpha\lib\Net40\Appccelerate.StateMachine.dll</HintPath>
+      <HintPath>..\packages\Appccelerate.StateMachine.1.0.29\lib\Net40\Appccelerate.StateMachine.dll</HintPath>
     </Reference>
     <Reference Include="Castle.Core">
-      <HintPath>..\packages\Castle.Core.2.5.2\lib\NET35\Castle.Core.dll</HintPath>
+      <HintPath>..\packages\Castle.Core.3.0.0.4001\lib\net40-client\Castle.Core.dll</HintPath>
     </Reference>
     <Reference Include="FakeItEasy">
-      <HintPath>..\packages\FakeItEasy.1.7.4257.42\lib\NET40\FakeItEasy.dll</HintPath>
+      <HintPath>..\packages\FakeItEasy.1.7.4574.62\lib\NET40\FakeItEasy.dll</HintPath>
     </Reference>
     <Reference Include="Machine.Specifications">
-      <HintPath>..\packages\Machine.Specifications.0.5.5.0\lib\net40\Machine.Specifications.dll</HintPath>
+      <HintPath>..\packages\Machine.Specifications.0.5.7\lib\net40\Machine.Specifications.dll</HintPath>
     </Reference>
     <Reference Include="Machine.Specifications.Clr4">
-      <HintPath>..\packages\Machine.Specifications.0.5.5.0\lib\net40\Machine.Specifications.Clr4.dll</HintPath>
+      <HintPath>..\packages\Machine.Specifications.0.5.7\lib\net40\Machine.Specifications.Clr4.dll</HintPath>
     </Reference>
     <Reference Include="System" />
     <Reference Include="System.Configuration" />
