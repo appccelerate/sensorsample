@@ -46,7 +46,8 @@
       <HintPath>..\packages\Appccelerate.EvaluationEngine.1.0.29\lib\Net40\Appccelerate.EvaluationEngine.dll</HintPath>
     </Reference>
     <Reference Include="Appccelerate.EventBroker, Version=1.0.0.0, Culture=neutral, PublicKeyToken=917bca444d1f2b4c, processorArchitecture=MSIL">
-      <HintPath>..\packages\Appccelerate.EventBroker.1.0.29\lib\Net40\Appccelerate.EventBroker.dll</HintPath>
+      <SpecificVersion>False</SpecificVersion>
+      <HintPath>..\packages\Appccelerate.EventBroker.1.0.36\lib\Net40\Appccelerate.EventBroker.dll</HintPath>
     </Reference>
     <Reference Include="Appccelerate.Fundamentals, Version=1.0.0.0, Culture=neutral, PublicKeyToken=917bca444d1f2b4c, processorArchitecture=MSIL">
       <HintPath>..\packages\Appccelerate.Fundamentals.1.0.29\lib\Net40\Appccelerate.Fundamentals.dll</HintPath>
