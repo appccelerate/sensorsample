@@ -59,7 +59,6 @@ namespace SensorSample.Bootstrapping
             builder
                 .Execute(() => this.InitializeEventBroker())
                 .Execute(sensor => sensor.StartObservation())
-                    .With(new InitializeSensorBehavior())
                     .With(new RegisterOnEventBrokerBehavior(this.globalEventBroker));
         }
 
