@@ -58,6 +58,7 @@ namespace SensorSample.Bootstrapping
 
         public void Resolve(IExtensionPoint<ISensor> extensionPoint)
         {
+            // TODO: pass travelCoordinator and evaluationEngine to DoorSensor
             extensionPoint.AddExtension(
                 new DoorSensor(
                     this.door, 
