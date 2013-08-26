@@ -92,7 +92,7 @@ namespace SensorSample.Bootstrapping
 
         protected override void DefineRunSyntax(ISyntaxBuilder<ISensor> builder)
         {
-            // TODO: add behavior at start of bootstrapping that load configuration from App.config
+            // TODO: add behavior at start of bootstrapping that loads configuration from App.config
             builder
                 .Execute(() => this.InitializeEventBroker())
                 .Execute(() => this.InitializeEvaluationEngine())
