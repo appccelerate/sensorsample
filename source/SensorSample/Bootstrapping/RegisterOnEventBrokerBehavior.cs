@@ -25,7 +25,7 @@ namespace SensorSample.Bootstrapping
 
     using SensorSample.Sensors;
 
-    // TODO: Implement this class as a bootstrapper behavior that rgisters all sensors on the event broker
+    // TODO: Implement this class as a bootstrapper behavior that registers all sensors on the event broker
     public class RegisterOnEventBrokerBehavior
     {
         private readonly IEventBroker globalEventBroker;
