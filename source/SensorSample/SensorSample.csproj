@@ -39,29 +39,39 @@
     <Prefer32Bit>false</Prefer32Bit>
   </PropertyGroup>
   <ItemGroup>
-    <Reference Include="Appccelerate.AsyncModule, Version=1.0.0.0, Culture=neutral, PublicKeyToken=917bca444d1f2b4c, processorArchitecture=MSIL">
-      <HintPath>..\packages\Appccelerate.AsyncModule.1.0.29\lib\Net40\Appccelerate.AsyncModule.dll</HintPath>
-    </Reference>
-    <Reference Include="Appccelerate.Bootstrapper, Version=1.0.0.0, Culture=neutral, PublicKeyToken=917bca444d1f2b4c, processorArchitecture=MSIL">
-      <HintPath>..\packages\Appccelerate.Bootstrapper.1.0.29\lib\Net40\Appccelerate.Bootstrapper.dll</HintPath>
-    </Reference>
-    <Reference Include="Appccelerate.EvaluationEngine, Version=1.0.0.0, Culture=neutral, PublicKeyToken=917bca444d1f2b4c, processorArchitecture=MSIL">
-      <HintPath>..\packages\Appccelerate.EvaluationEngine.1.0.29\lib\Net40\Appccelerate.EvaluationEngine.dll</HintPath>
-    </Reference>
-    <Reference Include="Appccelerate.EventBroker, Version=1.0.0.0, Culture=neutral, PublicKeyToken=917bca444d1f2b4c, processorArchitecture=MSIL">
+    <Reference Include="Appccelerate.Bootstrapper, Version=2.0.0.0, Culture=neutral, PublicKeyToken=917bca444d1f2b4c, processorArchitecture=MSIL">
       <SpecificVersion>False</SpecificVersion>
-      <HintPath>..\packages\Appccelerate.EventBroker.1.0.36\lib\Net40\Appccelerate.EventBroker.dll</HintPath>
+      <HintPath>..\packages\Appccelerate.Bootstrapper.2.0.98-alpha\lib\Net45\Appccelerate.Bootstrapper.dll</HintPath>
     </Reference>
-    <Reference Include="Appccelerate.Fundamentals, Version=1.0.0.0, Culture=neutral, PublicKeyToken=917bca444d1f2b4c, processorArchitecture=MSIL">
-      <HintPath>..\packages\Appccelerate.Fundamentals.1.0.29\lib\Net40\Appccelerate.Fundamentals.dll</HintPath>
+    <Reference Include="Appccelerate.EvaluationEngine, Version=2.0.0.0, Culture=neutral, PublicKeyToken=917bca444d1f2b4c, processorArchitecture=MSIL">
+      <SpecificVersion>False</SpecificVersion>
+      <HintPath>..\packages\Appccelerate.EvaluationEngine.2.0.98-alpha\lib\portable-windows8+net45\Appccelerate.EvaluationEngine.dll</HintPath>
     </Reference>
-    <Reference Include="Appccelerate.StateMachine, Version=1.0.0.0, Culture=neutral, PublicKeyToken=917bca444d1f2b4c, processorArchitecture=MSIL">
-      <HintPath>..\packages\Appccelerate.StateMachine.1.0.29\lib\Net40\Appccelerate.StateMachine.dll</HintPath>
+    <Reference Include="Appccelerate.EventBroker, Version=3.0.0.0, Culture=neutral, PublicKeyToken=917bca444d1f2b4c, processorArchitecture=MSIL">
+      <SpecificVersion>False</SpecificVersion>
+      <HintPath>..\packages\Appccelerate.EventBroker.3.0.98-alpha\lib\Net45\Appccelerate.EventBroker.dll</HintPath>
+    </Reference>
+    <Reference Include="Appccelerate.Fundamentals, Version=2.0.0.0, Culture=neutral, PublicKeyToken=917bca444d1f2b4c, processorArchitecture=MSIL">
+      <SpecificVersion>False</SpecificVersion>
+      <HintPath>..\packages\Appccelerate.Fundamentals.2.0.98-alpha\lib\portable-windows8+net45\Appccelerate.Fundamentals.dll</HintPath>
+    </Reference>
+    <Reference Include="Appccelerate.StateMachine, Version=2.0.0.0, Culture=neutral, PublicKeyToken=917bca444d1f2b4c, processorArchitecture=MSIL">
+      <SpecificVersion>False</SpecificVersion>
+      <HintPath>..\packages\Appccelerate.StateMachine.2.0.98-alpha\lib\portable-windows8+net45\Appccelerate.StateMachine.dll</HintPath>
     </Reference>
     <Reference Include="System" />
     <Reference Include="System.Core" />
-    <Reference Include="System.Reactive">
-      <HintPath>..\packages\Rx-Main.1.0.11226\lib\Net4\System.Reactive.dll</HintPath>
+    <Reference Include="System.Reactive.Core">
+      <HintPath>..\packages\Rx-Core.2.1.30214.0\lib\Net45\System.Reactive.Core.dll</HintPath>
+    </Reference>
+    <Reference Include="System.Reactive.Interfaces">
+      <HintPath>..\packages\Rx-Interfaces.2.1.30214.0\lib\Net45\System.Reactive.Interfaces.dll</HintPath>
+    </Reference>
+    <Reference Include="System.Reactive.Linq">
+      <HintPath>..\packages\Rx-Linq.2.1.30214.0\lib\Net45\System.Reactive.Linq.dll</HintPath>
+    </Reference>
+    <Reference Include="System.Reactive.PlatformServices">
+      <HintPath>..\packages\Rx-PlatformServices.2.1.30214.0\lib\Net45\System.Reactive.PlatformServices.dll</HintPath>
     </Reference>
     <Reference Include="System.Threading.Tasks.Dataflow, Version=4.5.11.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a, processorArchitecture=MSIL">
       <SpecificVersion>False</SpecificVersion>
