@@ -81,7 +81,7 @@ namespace SensorSample.Sensors
             // TODO: stop state machine
         }
 
-        [EventSubscription(EventTopics.BlackHoleDetected, typeof(Publisher))]
+        [EventSubscription(EventTopics.BlackHoleDetected, typeof(OnPublisher))]
         public void HandleBlackHoleDetection(object sender, EventArgs e)
         {
             // TODO: fire event onto state machine to tell it that a black hole was detected
