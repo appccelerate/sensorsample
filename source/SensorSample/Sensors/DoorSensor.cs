@@ -60,7 +60,7 @@ namespace SensorSample.Sensors
             this.door.Closed -= this.HandleDoorClosed;
         }
 
-        [EventSubscription(EventTopics.BlackHoleDetected, typeof(Publisher))]
+        [EventSubscription(EventTopics.BlackHoleDetected, typeof(OnPublisher))]
         public void HandleBlackHoleDetection(object sender, EventArgs e)
         {
             this.Log("black hole detected!");
