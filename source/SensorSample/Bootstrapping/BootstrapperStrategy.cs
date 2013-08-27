@@ -18,7 +18,6 @@
 
 namespace SensorSample.Bootstrapping
 {
-    using Appccelerate.AsyncModule;
     using Appccelerate.Bootstrapper;
     using Appccelerate.Bootstrapper.Configuration;
     using Appccelerate.Bootstrapper.Syntax;
@@ -44,7 +43,7 @@ namespace SensorSample.Bootstrapping
         {
             this.globalEventBroker = this.CreateGlobalEventBroker();
             this.evaluationEngine = new EvaluationEngine();
-            this.fileLogger = new AsynchronousVhptFileLogger(this.CreateModuleController(), this.CreateFileLogger());
+            this.fileLogger = new AsynchronousVhptFileLogger(this.CreateFileLogger());
 
             return new SensorResolver(
                 this.fileLogger,
@@ -85,18 +84,12 @@ namespace SensorSample.Bootstrapping
             return new VhptFileLogger();
         }
 
-        protected virtual ModuleController CreateModuleController()
-        {
-            return new ModuleController();
-        }
-
         protected override void DefineRunSyntax(ISyntaxBuilder<ISensor> builder)
         {
             // TODO: add behavior at start of bootstrapping that loads configuration from App.config
             builder
                 .Execute(() => this.InitializeEventBroker())
                 .Execute(() => this.InitializeEvaluationEngine())
-                .Execute(() => this.SetupFileLogger())
                 .Execute(sensor => sensor.StartObservation())
                     .With(new InitializeSensorBehavior())
                     .With(new RegisterOnEventBrokerBehavior(this.globalEventBroker));
@@ -128,12 +121,6 @@ namespace SensorSample.Bootstrapping
 
             this.evaluationEngine.Load(new VhptOracle());
             this.evaluationEngine.Load(new PanicModeTargetLevelOracle());
-        }
-
-        private void SetupFileLogger()
-        {
-            this.fileLogger.Initialize();
-            this.fileLogger.Start();
         }
     }
 }
