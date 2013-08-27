@@ -18,13 +18,9 @@
 
 namespace SensorSample.Specification
 {
-    using System;
     using System.Collections.Generic;
     using System.Configuration;
-    using System.Reflection;
 
-    using Appccelerate.AsyncModule;
-    using Appccelerate.AsyncModule.Events;
     using Appccelerate.Bootstrapper;
     using Appccelerate.Bootstrapper.Configuration;
     using Appccelerate.EventBroker;

@@ -86,7 +86,7 @@ namespace SensorSample.Sensors
             this.stateMachine.Stop();
         }
 
-        [EventSubscription(EventTopics.BlackHoleDetected, typeof(Publisher))]
+        [EventSubscription(EventTopics.BlackHoleDetected, typeof(OnPublisher))]
         public void HandleBlackHoleDetection(object sender, EventArgs e)
         {
             this.stateMachine.Fire(Events.BlackHoleDetected);
