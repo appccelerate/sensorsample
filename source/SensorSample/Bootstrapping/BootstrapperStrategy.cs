@@ -18,9 +18,10 @@
 
 namespace SensorSample.Bootstrapping
 {
-    using Appccelerate.AsyncModule;
     using Appccelerate.Bootstrapper;
+    using Appccelerate.Bootstrapper.Configuration;
     using Appccelerate.Bootstrapper.Syntax;
+    using Appccelerate.EvaluationEngine;
     using Appccelerate.EventBroker;
     using Appccelerate.StateMachine;
 
@@ -38,7 +39,8 @@ namespace SensorSample.Bootstrapping
         public override IExtensionResolver<ISensor> CreateExtensionResolver()
         {
             this.globalEventBroker = this.CreateGlobalEventBroker();
-            this.fileLogger = new AsynchronousVhptFileLogger(this.CreateModuleController(), this.CreateFileLogger());
+            
+            this.fileLogger = new AsynchronousVhptFileLogger(this.CreateFileLogger());
 
             return new SensorResolver(
                 this.fileLogger,
@@ -70,11 +72,6 @@ namespace SensorSample.Bootstrapping
         protected virtual IVhptFileLogger CreateFileLogger()
         {
             return new VhptFileLogger();
-        }
-
-        protected virtual ModuleController CreateModuleController()
-        {
-            return new ModuleController();
         }
 
         protected override void DefineRunSyntax(ISyntaxBuilder<ISensor> builder)

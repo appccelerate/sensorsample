@@ -18,42 +18,34 @@
 
 namespace SensorSample.Asynchronous
 {
-    using Appccelerate.AsyncModule;
+    using System.Threading.Tasks.Dataflow;
 
     using SensorSample.Sirius;
 
     public sealed class AsynchronousVhptFileLogger : IAsynchronousFileLogger
     {
-        private readonly IModuleController moduleController;
-
         private readonly IVhptFileLogger decoratedVhptFileLogger;
+        
 
-        public AsynchronousVhptFileLogger(IModuleController moduleController, IVhptFileLogger decoratedVhptFileLogger)
+        public AsynchronousVhptFileLogger(IVhptFileLogger decoratedVhptFileLogger)
         {
-            this.moduleController = moduleController;
             this.decoratedVhptFileLogger = decoratedVhptFileLogger;
-        }
-
-        public void Initialize()
-        {
-            // TODO: initialize module controller
-        }
-
-        public void Start()
-        {
-            // TODO: start module controller
         }
 
         public void Log(string message)
         {
-            // TODO: enqueue message on module controller
+            // TODO: post message to action block (by calling this.ConsumeMessage)
         }
 
-        // TODO: add consumer method for message that writes message to decorated file logger
+        private void ConsumeMessage(string message)
+        {
+            this.decoratedVhptFileLogger.Log(message);
+        }
 
         public void Dispose()
         {
-            // TODO: dispose module controller and decorated file logger
+            // TODO: mark action block as Completed
+            this.decoratedVhptFileLogger.Dispose();
         }
     }
 }
