@@ -18,7 +18,6 @@
 
 namespace SensorSample.Bootstrapping
 {
-    using Appccelerate.AsyncModule;
     using Appccelerate.Bootstrapper;
     using Appccelerate.Bootstrapper.Configuration;
     using Appccelerate.Bootstrapper.Syntax;
@@ -44,7 +43,7 @@ namespace SensorSample.Bootstrapping
         {
             this.globalEventBroker = this.CreateGlobalEventBroker();
             this.evaluationEngine = new EvaluationEngine();
-            this.fileLogger = new AsynchronousVhptFileLogger(this.CreateModuleController(), this.CreateFileLogger());
+            this.fileLogger = new AsynchronousVhptFileLogger(this.CreateFileLogger());
 
             return new SensorResolver(
                 this.fileLogger,
@@ -85,17 +84,11 @@ namespace SensorSample.Bootstrapping
             return new VhptFileLogger();
         }
 
-        protected virtual ModuleController CreateModuleController()
-        {
-            return new ModuleController();
-        }
-
         protected override void DefineRunSyntax(ISyntaxBuilder<ISensor> builder)
         {
             // TODO: add initialization of EvaluationEngine and load the modules Sirius.VhptOracle and Evaluation.PanicModeTargetLevelOracle
             builder
                 .Execute(() => this.InitializeEventBroker())
-                .Execute(() => this.SetupFileLogger())
                 .Execute(sensor => sensor.StartObservation())
                     .With(new InitializeSensorBehavior())
                     .With(new RegisterOnEventBrokerBehavior(this.globalEventBroker));
@@ -119,12 +112,6 @@ namespace SensorSample.Bootstrapping
         private void InitializeEventBroker()
         {
             this.globalEventBroker.AddExtension(new EventBrokerReporter());
-        }
-
-        private void SetupFileLogger()
-        {
-            this.fileLogger.Initialize();
-            this.fileLogger.Start();
         }
     }
 }

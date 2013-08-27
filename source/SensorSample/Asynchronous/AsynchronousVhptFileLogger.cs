@@ -18,38 +18,26 @@
 
 namespace SensorSample.Asynchronous
 {
-    using Appccelerate.AsyncModule;
+    using System.Threading.Tasks.Dataflow;
 
     using SensorSample.Sirius;
 
     public sealed class AsynchronousVhptFileLogger : IAsynchronousFileLogger
     {
-        private readonly IModuleController moduleController;
-
         private readonly IVhptFileLogger decoratedVhptFileLogger;
+        private readonly ActionBlock<string> block;
 
-        public AsynchronousVhptFileLogger(IModuleController moduleController, IVhptFileLogger decoratedVhptFileLogger)
+        public AsynchronousVhptFileLogger(IVhptFileLogger decoratedVhptFileLogger)
         {
-            this.moduleController = moduleController;
             this.decoratedVhptFileLogger = decoratedVhptFileLogger;
-        }
-
-        public void Initialize()
-        {
-            this.moduleController.Initialize(this);
-        }
-
-        public void Start()
-        {
-            this.moduleController.Start();
+            this.block = new ActionBlock<string>(message => this.ConsumeMessage(message));
         }
 
         public void Log(string message)
         {
-            this.moduleController.EnqueueMessage(message);
+            this.block.Post(message);
         }
 
-        [MessageConsumer]
         public void ConsumeMessage(string message)
         {
             this.decoratedVhptFileLogger.Log(message);
@@ -57,7 +45,7 @@ namespace SensorSample.Asynchronous
 
         public void Dispose()
         {
-            this.moduleController.Stop();
+            this.block.Complete();
             this.decoratedVhptFileLogger.Dispose();
         }
     }
