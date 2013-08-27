@@ -108,7 +108,7 @@ namespace SensorSample.Sensors
             this.stateMachine.Stop();
         }
 
-        [EventSubscription(EventTopics.BlackHoleDetected, typeof(Publisher))]
+        [EventSubscription(EventTopics.BlackHoleDetected, typeof(OnPublisher))]
         public void HandleBlackHoleDetection(object sender, EventArgs e)
         {
             this.stateMachine.Fire(Events.BlackHoleDetected);
@@ -134,7 +134,7 @@ namespace SensorSample.Sensors
             this.stateMachine
                 .In(States.DoorOpenInNormalMode)
                 .On(Events.BlackHoleDetected).Goto(States.DoorOpenInPanicMode)
-                .On(Events.DoorClosed).Goto(States.DoorClosedInNormalMode).Execute(this.DetermineTargetLevel, this.LogDoorClosedInNormalMode);
+                .On(Events.DoorClosed).Goto(States.DoorClosedInNormalMode).Execute(this.DetermineTargetLevel).Execute(this.LogDoorClosedInNormalMode);
 
             this.stateMachine
                 .In(States.DoorClosedInPanicMode)
@@ -142,11 +142,12 @@ namespace SensorSample.Sensors
 
             this.stateMachine
                 .In(States.DoorOpenInPanicMode)
-                .On(Events.DoorClosed).Goto(States.DoorClosedInPanicMode).Execute(this.DetermineTargetLevel, this.LogDoorClosedInPanicMode);
+                .On(Events.DoorClosed).Goto(States.DoorClosedInPanicMode).Execute(this.DetermineTargetLevel).Execute(this.LogDoorClosedInPanicMode);
 
             this.stateMachine
                 .In(States.PanicMode)
-                .ExecuteOnEntry(this.LogBlackHoleDetected, this.SetInPanicModeFlag)
+                .ExecuteOnEntry(this.LogBlackHoleDetected)
+                .ExecuteOnEntry(this.SetInPanicModeFlag)
                 .On(Events.BlackHoleDetected);
 
             this.stateMachine.Initialize(States.NormalMode);

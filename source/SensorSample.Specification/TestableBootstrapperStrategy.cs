@@ -18,13 +18,9 @@
 
 namespace SensorSample.Specification
 {
-    using System;
     using System.Collections.Generic;
     using System.Configuration;
-    using System.Reflection;
 
-    using Appccelerate.AsyncModule;
-    using Appccelerate.AsyncModule.Events;
     using Appccelerate.Bootstrapper;
     using Appccelerate.Bootstrapper.Configuration;
     using Appccelerate.EventBroker;
@@ -78,15 +74,6 @@ namespace SensorSample.Specification
             return this.FileLogger;
         }
 
-        protected override ModuleController CreateModuleController()
-        {
-            var moduleController = base.CreateModuleController();
-
-            moduleController.BeforeEnqueueMessage += this.ModuleControllerOnBeforeEnqueueMessage;
-
-            return moduleController;
-        }
-
         protected override EventBroker CreateGlobalEventBroker()
         {
             return new EventBroker(new UnitTestFactory());
@@ -100,23 +87,6 @@ namespace SensorSample.Specification
         protected override ExtensionConfigurationSectionBehavior CreateExtensionConfigurationSectionBehavior()
         {
             return new ExtensionConfigurationSectionBehavior(new TestableExtensionConfigurationSectionBehaviorFactory(this.Configuration));
-        }
-
-        private void ModuleControllerOnBeforeEnqueueMessage(object sender, EnqueueMessageEventArgs enqueueMessageEventArgs)
-        {
-            enqueueMessageEventArgs.Cancel = true;
-
-            MethodInfo method = null;
-
-            foreach (MethodInfo methodInfo in enqueueMessageEventArgs.Module.GetType().GetMethods())
-            {
-                if (Attribute.IsDefined(methodInfo, typeof(MessageConsumerAttribute), true))
-                {
-                    method = methodInfo;
-                }
-            }
-
-            method.Invoke(enqueueMessageEventArgs.Module, new[] { enqueueMessageEventArgs.Message });
         }
 
         private class TestableExtensionConfigurationSectionBehaviorFactory : DefaultExtensionConfigurationSectionBehaviorFactory, ILoadConfigurationSection
