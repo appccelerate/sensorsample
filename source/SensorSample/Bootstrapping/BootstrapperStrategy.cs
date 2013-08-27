@@ -18,9 +18,10 @@
 
 namespace SensorSample.Bootstrapping
 {
-    using Appccelerate.AsyncModule;
     using Appccelerate.Bootstrapper;
+    using Appccelerate.Bootstrapper.Configuration;
     using Appccelerate.Bootstrapper.Syntax;
+    using Appccelerate.EvaluationEngine;
     using Appccelerate.EventBroker;
     using Appccelerate.StateMachine;
 
@@ -38,7 +39,8 @@ namespace SensorSample.Bootstrapping
         public override IExtensionResolver<ISensor> CreateExtensionResolver()
         {
             this.globalEventBroker = this.CreateGlobalEventBroker();
-            this.fileLogger = new AsynchronousVhptFileLogger(this.CreateModuleController(), this.CreateFileLogger());
+            
+            this.fileLogger = new AsynchronousVhptFileLogger(this.CreateFileLogger());
 
             return new SensorResolver(
                 this.fileLogger,
@@ -72,16 +74,10 @@ namespace SensorSample.Bootstrapping
             return new VhptFileLogger();
         }
 
-        protected virtual ModuleController CreateModuleController()
-        {
-            return new ModuleController();
-        }
-
         protected override void DefineRunSyntax(ISyntaxBuilder<ISensor> builder)
         {
             builder
                 .Execute(() => this.InitializeEventBroker())
-                .Execute(() => this.SetupFileLogger())
                 .Execute(sensor => sensor.StartObservation())
                     .With(new InitializeSensorBehavior())
                     .With(new RegisterOnEventBrokerBehavior(this.globalEventBroker));
@@ -105,12 +101,6 @@ namespace SensorSample.Bootstrapping
         private void InitializeEventBroker()
         {
             this.globalEventBroker.AddExtension(new EventBrokerReporter());
-        }
-
-        private void SetupFileLogger()
-        {
-            this.fileLogger.Initialize();
-            this.fileLogger.Start();
         }
     }
 }
