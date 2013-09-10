@@ -1,0 +1,6 @@
+== Nuget Package Restore ==
+If the nuget package restore fails you need to add the following nuget feed to your package sources:
+
+https://teamcity.bbv.ch/guestAuth/app/nuget/v1/FeedService.svc
+
+Then rebuild the solution.
