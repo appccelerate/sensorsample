@@ -28,7 +28,7 @@ namespace SensorSample.Sirius
         event EventHandler Closed;
     }
 
-    public class VhptDoor : IVhptDoor
+    public sealed class VhptDoor : IVhptDoor
     {
         private readonly IDisposable observer;
 
