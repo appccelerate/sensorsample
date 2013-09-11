@@ -45,6 +45,8 @@ namespace SensorSample.Asynchronous
         public void Dispose()
         {
             // TODO: mark action block as Completed
+            this.block.Completion.Wait();
+
             this.decoratedVhptFileLogger.Dispose();
         }
     }
