@@ -33,9 +33,8 @@ namespace SensorSample.Sirius
 
         public VhptBlackHoleSubOrbitDetectionEngine()
         {
-            this.engine =
-                Observable.Start(() => Observable.Interval(TimeSpan.FromSeconds(10)).First()).Subscribe(
-                    interval => this.OnBlackHoleDetected(EventArgs.Empty));
+            this.engine = Observable.Timer(TimeSpan.FromSeconds(10))
+                .Subscribe(interval => this.OnBlackHoleDetected(EventArgs.Empty));
         }
 
         public event EventHandler BlackHoleDetected;
