@@ -18,7 +18,8 @@
 
 namespace SensorSample.Asynchronous
 {
-    using System.Threading.Tasks.Dataflow;
+    // TODO: install nuget package "Microsoft TPL Dataflow" and uncomment using
+//    using System.Threading.Tasks.Dataflow;
 
     using SensorSample.Sirius;
 
