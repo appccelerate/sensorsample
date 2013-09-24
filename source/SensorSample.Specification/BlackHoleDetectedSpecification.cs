@@ -20,7 +20,6 @@ namespace SensorSample.Specification
 {
     using FakeItEasy;
 
-
     public class BlackHoleDetectedSpecification : InitializedApplicationSpecification
     {
         protected static void RunApplicationWithBlackHole()

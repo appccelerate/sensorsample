@@ -18,11 +18,12 @@
 
 namespace SensorSample.Asynchronous
 {
+    using System;
     using System.Threading.Tasks.Dataflow;
 
     using SensorSample.Sirius;
 
-    public sealed class AsynchronousVhptFileLogger : IAsynchronousFileLogger
+    public sealed class AsynchronousVhptFileLogger : IAsynchronousFileLogger, IDisposable
     {
         private readonly IVhptFileLogger decoratedVhptFileLogger;
         private readonly ActionBlock<string> block;
@@ -38,17 +39,17 @@ namespace SensorSample.Asynchronous
             this.block.Post(message);
         }
 
-        public void ConsumeMessage(string message)
-        {
-            this.decoratedVhptFileLogger.Log(message);
-        }
-
         public void Dispose()
         {
             this.block.Complete();
             this.block.Completion.Wait();
 
             this.decoratedVhptFileLogger.Dispose();
+        }
+
+        private void ConsumeMessage(string message)
+        {
+            this.decoratedVhptFileLogger.Log(message);
         }
     }
 }

@@ -38,7 +38,7 @@ namespace SensorSample.Bootstrapping
 
         private readonly IVhptTravelCoordinator travelCoordinator;
 
-        private IStateMachine<States, Events> stateMachine;
+        private readonly IStateMachine<States, Events> stateMachine;
 
         public SensorResolver(
             IAsynchronousFileLogger fileLogger, 
