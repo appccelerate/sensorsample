@@ -76,7 +76,6 @@ namespace SensorSample.Bootstrapping
 
         protected override void DefineRunSyntax(ISyntaxBuilder<ISensor> builder)
         {
-            // TODO: add initialization and start of async file logger
             builder
                 .Execute(() => this.InitializeEventBroker())
                 .Execute(sensor => sensor.StartObservation())
