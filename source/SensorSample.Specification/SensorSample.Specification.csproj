@@ -37,39 +37,45 @@
     <Prefer32Bit>false</Prefer32Bit>
   </PropertyGroup>
   <ItemGroup>
-    <Reference Include="Appccelerate.Bootstrapper, Version=2.0.0.0, Culture=neutral, PublicKeyToken=917bca444d1f2b4c, processorArchitecture=MSIL">
+    <Reference Include="Appccelerate.Bootstrapper, Version=2.1.0.0, Culture=neutral, PublicKeyToken=917bca444d1f2b4c, processorArchitecture=MSIL">
       <SpecificVersion>False</SpecificVersion>
-      <HintPath>..\packages\Appccelerate.Bootstrapper.2.0.98-alpha\lib\Net45\Appccelerate.Bootstrapper.dll</HintPath>
+      <HintPath>..\packages\Appccelerate.Bootstrapper.2.1.0\lib\net45\Appccelerate.Bootstrapper.dll</HintPath>
     </Reference>
-    <Reference Include="Appccelerate.EvaluationEngine, Version=2.0.0.0, Culture=neutral, PublicKeyToken=917bca444d1f2b4c, processorArchitecture=MSIL">
+    <Reference Include="Appccelerate.EvaluationEngine, Version=2.1.0.0, Culture=neutral, PublicKeyToken=917bca444d1f2b4c, processorArchitecture=MSIL">
       <SpecificVersion>False</SpecificVersion>
-      <HintPath>..\packages\Appccelerate.EvaluationEngine.2.0.98-alpha\lib\portable-windows8+net45\Appccelerate.EvaluationEngine.dll</HintPath>
+      <HintPath>..\packages\Appccelerate.EvaluationEngine.2.1.0\lib\portable-windows8+net45\Appccelerate.EvaluationEngine.dll</HintPath>
     </Reference>
-    <Reference Include="Appccelerate.EventBroker, Version=3.0.0.0, Culture=neutral, PublicKeyToken=917bca444d1f2b4c, processorArchitecture=MSIL">
+    <Reference Include="Appccelerate.EventBroker, Version=3.1.0.0, Culture=neutral, PublicKeyToken=917bca444d1f2b4c, processorArchitecture=MSIL">
       <SpecificVersion>False</SpecificVersion>
-      <HintPath>..\packages\Appccelerate.EventBroker.3.0.98-alpha\lib\Net45\Appccelerate.EventBroker.dll</HintPath>
+      <HintPath>..\packages\Appccelerate.EventBroker.3.1.0\lib\net45\Appccelerate.EventBroker.dll</HintPath>
     </Reference>
-    <Reference Include="Appccelerate.Fundamentals, Version=2.0.0.0, Culture=neutral, PublicKeyToken=917bca444d1f2b4c, processorArchitecture=MSIL">
+    <Reference Include="Appccelerate.Fundamentals, Version=2.1.0.0, Culture=neutral, PublicKeyToken=917bca444d1f2b4c, processorArchitecture=MSIL">
       <SpecificVersion>False</SpecificVersion>
-      <HintPath>..\packages\Appccelerate.Fundamentals.2.0.98-alpha\lib\portable-windows8+net45\Appccelerate.Fundamentals.dll</HintPath>
+      <HintPath>..\packages\Appccelerate.Fundamentals.2.1.0\lib\portable-windows8+net45\Appccelerate.Fundamentals.dll</HintPath>
     </Reference>
-    <Reference Include="Appccelerate.StateMachine, Version=2.0.0.0, Culture=neutral, PublicKeyToken=917bca444d1f2b4c, processorArchitecture=MSIL">
+    <Reference Include="Appccelerate.StateMachine, Version=2.1.0.0, Culture=neutral, PublicKeyToken=917bca444d1f2b4c, processorArchitecture=MSIL">
       <SpecificVersion>False</SpecificVersion>
-      <HintPath>..\packages\Appccelerate.StateMachine.2.0.98-alpha\lib\portable-windows8+net45\Appccelerate.StateMachine.dll</HintPath>
+      <HintPath>..\packages\Appccelerate.StateMachine.2.1.0\lib\portable-windows8+net45\Appccelerate.StateMachine.dll</HintPath>
     </Reference>
-    <Reference Include="FakeItEasy, Version=1.13.1.0, Culture=neutral, PublicKeyToken=eff28e2146d5fd2c, processorArchitecture=MSIL">
+    <Reference Include="FakeItEasy, Version=1.18.0.0, Culture=neutral, PublicKeyToken=eff28e2146d5fd2c, processorArchitecture=MSIL">
       <SpecificVersion>False</SpecificVersion>
-      <HintPath>..\packages\FakeItEasy.1.13.1\lib\net40\FakeItEasy.dll</HintPath>
+      <HintPath>..\packages\FakeItEasy.1.18.0\lib\net40\FakeItEasy.dll</HintPath>
     </Reference>
-    <Reference Include="Machine.Specifications">
-      <HintPath>..\packages\Machine.Specifications.0.5.16\lib\net40\Machine.Specifications.dll</HintPath>
+    <Reference Include="Machine.Specifications, Version=0.8.0.0, Culture=neutral, processorArchitecture=MSIL">
+      <SpecificVersion>False</SpecificVersion>
+      <HintPath>..\packages\Machine.Specifications.0.8.0\lib\net45\Machine.Specifications.dll</HintPath>
     </Reference>
-    <Reference Include="Machine.Specifications.Clr4">
-      <HintPath>..\packages\Machine.Specifications.0.5.16\lib\net40\Machine.Specifications.Clr4.dll</HintPath>
+    <Reference Include="Machine.Specifications.Clr4, Version=0.8.0.0, Culture=neutral, processorArchitecture=MSIL">
+      <SpecificVersion>False</SpecificVersion>
+      <HintPath>..\packages\Machine.Specifications.0.8.0\lib\net45\Machine.Specifications.Clr4.dll</HintPath>
     </Reference>
     <Reference Include="System" />
     <Reference Include="System.Configuration" />
     <Reference Include="System.Core" />
+    <Reference Include="System.Threading.Tasks.Dataflow, Version=4.5.14.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a, processorArchitecture=MSIL">
+      <SpecificVersion>False</SpecificVersion>
+      <HintPath>..\packages\Microsoft.Tpl.Dataflow.4.5.14\lib\portable-net45+win8\System.Threading.Tasks.Dataflow.dll</HintPath>
+    </Reference>
     <Reference Include="System.Xml.Linq" />
     <Reference Include="System.Data.DataSetExtensions" />
     <Reference Include="Microsoft.CSharp" />
