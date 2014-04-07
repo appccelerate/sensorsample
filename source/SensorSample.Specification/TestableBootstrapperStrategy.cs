@@ -57,10 +57,5 @@ namespace SensorSample.Specification
         {
             return this.Door;
         }
-
-        protected override IVhptBlackHoleSubOrbitDetectionEngine CreateBlackHoleSubOrbitDetectionEngine()
-        {
-            return this.BlackHoleSubOrbitDetectionEngine;
-        }
     }
 }
